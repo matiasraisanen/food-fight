@@ -1,6 +1,6 @@
-# solidabis-koodihaaste-2022
+# Solidabis Koodihaaste 2022
 
-Coding challenge for Solidabis //
+Solidabis code challenge 2022 //
 [Solidabis koodihaaste 2022](https://koodihaaste.solidabis.com/intro)
 
 *Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022*
