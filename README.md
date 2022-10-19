@@ -5,6 +5,8 @@ Coding challenge for Solidabis //
 
 *Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022*
 
+I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish.
+
 ## Introduction
 The objective of this project is to take part in Solidabis CodeChallenge 2022.
 
