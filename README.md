@@ -8,7 +8,7 @@ Solidabis code challenge 2022 //
 I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish.
 
 ## Introduction
-The objective of this project is to take part in Solidabis CodeChallenge 2022.
+The objective of this project is to take part in Solidabis code challenge 2022.
 
 In it, the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other.
 
@@ -16,7 +16,7 @@ The application must:
 1. Retrieve nutritional contents of foodstuffs from a 3rd party source
 2. Transform nutritional contents into character attributes
 3. Have logic that allows two foodstuffs to duel each other
-4. Present the duel results as an API response, or visually on the front end
+4. Present the duel results visually on the front end
 
 ## Infrastructure
 
