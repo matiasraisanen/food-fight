@@ -8,7 +8,14 @@ Coding challenge for Solidabis //
 ## Introduction
 The objective of this project is to take part in Solidabis CodeChallenge 2022.
 
-In it, the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other. The food stats must be retrieved from a 3rd party source. The stats are then converted into gamified fighter stats that are used to pit the two foods againts each other. The outcome of the fight is finally displayed to the user.
+In it, the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other.
+
+The application must:
+1. Retrieve nutritional contents of foodstuffs from a 3rd party source
+2. Transform nutritional contents into character attributes
+3. Have logic that allows two foodstuffs to duel each other
+4. Present the duel results as an API response, or visually on the front end
+
 ## Infrastructure
 
 ![Koodihaaste infra](./architecture.drawio.svg)
@@ -27,7 +34,7 @@ It is also hosted on AWS as a static website on an S3 Bucket.
 
 On the front end, the user will type a food into a search box and press "submit".
 
-The frontend will then call API Gateway, which will forward the request to a lambda function, which will then in turn call **Fineli foods API** with the requested food. The lambda function will then parse the "fighter" stats from the resolved API call, and return them to the frontend.
+The frontend will then call API Gateway, which will forward the request to a lambda function, which will in turn call **Fineli foods API** with the requested food. The lambda function will then transform the nutritional contents received into character stats, and return them to the frontend.
 
 Once the user has selected two combatants, they will press "begin" to start the fight.
 The frontend will then use simple maths to calculate the winner of the food fight, and display the results to the user.
