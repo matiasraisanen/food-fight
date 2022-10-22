@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: food-into-stats API
+  description: Converts foodstuffs into character stats
+  version: "0.0.1"
+paths:
+  "/food-into-stats":
+    get:
+      operationId: foodIntoStats
+      description: GET food from 3rd party source and convert into character stats
+      parameters:
+        - name: food
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+components:
+  schemas:
+    CharacterObject:
+      description: Player character stats
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name to which the item mapped to in Fineli's database
+          example: "Omena, ulkomainen, kuorineen"
+        energy:
+          type: number
+          description: Energy contents (kcal)
+          example: 38.852571462547175
+        carbohydrate:
+          type: number
+          description: Carb contents (g)
+          example: 8.19540006637573
+        protein:
+          type: number
+          description: Protein contents (g)
+          example: 0.165299997925758
+        fat:
+          type: number
+          description: Fat contents (g)
+          example: 0.087000001296401
+        cooldown:
+          type: number
+          description: Cooldown on character attacks (seconds). Value of carbs, proteins and fats summed up together.
+          example: 8.447700065597887
+    SuccessResponse:
+      description: Success response
+      type: object
+      properties:
+        message: string
+        data:
+          $ref: "#/components/schemas/CharacterObject"
+    ErrorResponse:
+      description: Failed response
+      type: object
+      properties:
+        statusCode:
+          type: number
+          description: Error status code
+          example: 404
+        message:
+          type: string
+          description: Error message
+          example: "No food called '${food}' found in Fineli"
