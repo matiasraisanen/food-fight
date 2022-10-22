@@ -4,6 +4,14 @@ info:
   description: Converts foodstuffs into character stats
   version: "0.0.1"
 paths:
+  "/":
+    get:
+      summary: proxy
+      description: Proxy for static website
+      responses:
+        "200":
+          description: OK
+
   "/api/food-into-stats":
     get:
       operationId: foodIntoStats
@@ -21,6 +29,10 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
+        "404":
+          description: Food not found
+        "500":
+          description: Other server error
 
 components:
   schemas:
@@ -30,7 +42,7 @@ components:
       properties:
         name:
           type: string
-          description: Name to which the item mapped to in Fineli's database
+          description: Name to which the item is mapped to in Fineli's database
           example: "Omena, ulkomainen, kuorineen"
         energy:
           type: number
@@ -56,7 +68,9 @@ components:
       description: Success response
       type: object
       properties:
-        message: string
+        message:
+          type: string
+          example: success
         data:
           $ref: "#/components/schemas/CharacterObject"
     ErrorResponse:

@@ -58,11 +58,31 @@ export class Api extends Construct {
       ),
     });
 
+    const bucket = new cdk.aws_s3.Bucket(this, "Bucket", {
+      publicReadAccess: true,
+      // blockPublicAccess: cdk.aws_s3.BlockPublicAccess.BLOCK_ALL,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      bucketName: "solidabis-koodihaaste-2022-bucket",
+      autoDeleteObjects: true,
+      websiteIndexDocument: "index.html",
+      websiteErrorDocument: "index.html",
+    });
+
+    new cdk.aws_s3_deployment.BucketDeployment(this, "Deploy", {
+      sources: [cdk.aws_s3_deployment.Source.asset("../static")],
+      destinationBucket: bucket,
+    });
+
     const api = new openapix.Api(this, "KoodihaasteAPI", {
       source: path.join(__dirname, "./schema.yaml"),
       paths: {
         "/api/food-into-stats": {
           get: new openapix.LambdaIntegration(this, foodIntoStatsFn),
+        },
+        "/": {
+          get: new openapix.HttpIntegration(this, bucket.bucketWebsiteUrl, {
+            httpMethod: "get",
+          }),
         },
       },
     });
