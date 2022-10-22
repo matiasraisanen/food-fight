@@ -1,5 +1,7 @@
 import { Construct } from "constructs";
 import * as cdk from "aws-cdk-lib";
+import * as openapix from "@alma-cdk/openapix";
+import * as path from "path";
 
 export class Api extends Construct {
   public readonly api: cdk.aws_apigateway.SpecRestApi;
@@ -21,12 +23,6 @@ export class Api extends Construct {
       timeout: cdk.Duration.seconds(10),
     });
 
-    // Policy for retrieving the API key from secrets manager
-    const retrieveSecretPolicy = new cdk.aws_iam.PolicyStatement({
-      actions: ["secretsmanager:GetSecretValue"],
-      resources: ["API_KEY_ARN"],
-    });
-
     foodIntoStatsFn.role?.attachInlinePolicy(
       new cdk.aws_iam.Policy(this, "getApiKeyPolicy", {
         statements: [retrieveSecretPolicy],
@@ -36,20 +32,27 @@ export class Api extends Construct {
     // Configure domain koodihaaste.matiasraisanen.com
     const domainName = "koodihaaste.matiasraisanen.com";
 
-    const myHostedZone = new cdk.aws_route53.HostedZone(this, "HostedZone", {
-      zoneName: "matiasraisanen.com",
+    // const myHostedZone = new cdk.aws_route53.HostedZone(this, "HostedZone", {
+    //   zoneName: "matiasraisanen.com",
+    // });
+    const myHostedZone = cdk.aws_route53.HostedZone.fromLookup(this, "HostedZone", {
+      domainName: "matiasraisanen.com",
     });
 
     const certificate = new cdk.aws_certificatemanager.Certificate(this, "Certificate", {
-      domainName,
+      domainName: "koodihaaste.matiasraisanen.com",
       validation: cdk.aws_certificatemanager.CertificateValidation.fromDns(myHostedZone),
     });
 
     // Create API Gateway domain
     const domain = new cdk.aws_apigateway.DomainName(this, "ApiGwDomainName", {
-      domainName,
+      domainName: "koodihaaste.matiasraisanen.com",
       certificate,
       endpointType: cdk.aws_apigateway.EndpointType.REGIONAL,
+    });
+
+    new cdk.CfnOutput(this, "Domain", {
+      value: domain.domainName,
     });
 
     // Map the domain into Route53 base domain zone as a record
@@ -60,5 +63,21 @@ export class Api extends Construct {
         new cdk.aws_route53_targets.ApiGatewayDomain(domain)
       ),
     });
+
+    const api = new openapix.Api(this, "KoodihaasteAPI", {
+      source: path.join(__dirname, "./schema.yaml"),
+      paths: {
+        "/food-into-stats": {
+          get: new openapix.LambdaIntegration(this, foodIntoStatsFn),
+        },
+      },
+    });
+
+    new cdk.aws_apigateway.BasePathMapping(this, "BasePathMapping", {
+      domainName: domain,
+      restApi: api,
+    });
+
+    this.api = api;
   }
 }
