@@ -1,1 +1,1 @@
-npx cdk deploy --profile myPersonalAws --all
+npx cdk deploy --profile myPersonalAws --require-approval never --all 
