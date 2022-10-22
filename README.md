@@ -20,7 +20,7 @@ The application must:
 
 ## Infrastructure
 
-![Koodihaaste infra](./architecture.drawio.svg)
+![Koodihaaste infra](./architecture/architecture.drawio.svg)
 
 ## Back end
 
@@ -69,7 +69,7 @@ To avoid the fights taking too long, the outcome is pre-calculated and shown to 
 
 ## Final notes
 
-I would like to take part in the koodihaaste-competition.  
+I would like to take part in the koodihaaste competition.  
 I am also open for interesting job offers **:-)**
 
 You can contact me at [matias@matiasraisanen.com](mailto:matias@matiasraisanen.com)
