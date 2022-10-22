@@ -4,7 +4,7 @@ info:
   description: Converts foodstuffs into character stats
   version: "0.0.1"
 paths:
-  "/food-into-stats":
+  "/api/food-into-stats":
     get:
       operationId: foodIntoStats
       description: GET food from 3rd party source and convert into character stats

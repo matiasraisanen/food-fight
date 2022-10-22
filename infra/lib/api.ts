@@ -23,12 +23,6 @@ export class Api extends Construct {
       timeout: cdk.Duration.seconds(10),
     });
 
-    foodIntoStatsFn.role?.attachInlinePolicy(
-      new cdk.aws_iam.Policy(this, "getApiKeyPolicy", {
-        statements: [retrieveSecretPolicy],
-      })
-    );
-
     // Configure domain koodihaaste.matiasraisanen.com
     const domainName = "koodihaaste.matiasraisanen.com";
 
@@ -67,7 +61,7 @@ export class Api extends Construct {
     const api = new openapix.Api(this, "KoodihaasteAPI", {
       source: path.join(__dirname, "./schema.yaml"),
       paths: {
-        "/food-into-stats": {
+        "/api/food-into-stats": {
           get: new openapix.LambdaIntegration(this, foodIntoStatsFn),
         },
       },
