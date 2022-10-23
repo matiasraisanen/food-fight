@@ -1,0 +1,74 @@
+.App {
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #282c34;
+  display: flex;
+}
+
+.Title {
+  min-width: 100%;
+  background-color: cadetblue;
+  color: black;
+}
+.App-cardZone {
+  min-height: 50vh;
+  width: 80vh;
+  /* min-width: 100vh; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  /* color: white; */
+}
+.SearchForm {
+  /* margin-top: auto; */
+  display: flex;
+  color: black;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 80vh;
+}
+
+.SearchRow {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.fightLog {
+  margin-top: 5vh;
+  width: 80vh;
+  height: 30vh;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #000;
+  border: 1px solid #000;
+  color: #00ff00;
+  padding: 8px;
+  font-family: courier new;
+  font-size: calc(1em * 0.8);
+}
+
+.fightLogHeader {
+  background-color: #00ff00;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
