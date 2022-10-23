@@ -17,4 +17,8 @@
 AWS_PROFILE_NAME="myPersonalAws"
 
 
+cd static
+npm run build
+cd ..
+
 npx cdk deploy --profile $AWS_PROFILE_NAME --require-approval never --all 
