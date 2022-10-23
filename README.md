@@ -88,7 +88,7 @@ If these conditions cannot be met, we will fall back to just the first item in t
 | -------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | HP             | Energy (kcal)                               | Total health points                                                                       |
 | ATTACK         | Carbs (g)                                   | Damage per strike                                                                         |
-| DEFENCE (%)    | Protein (g)                                 | Mitigates incoming damage by a percentage. 1g = 1%                                        |
+| DEFENCE (%)    | Protein (g)                                 | Mitigates damage from an incoming strike by a percentage. 1g = 1%                         |
 | COOLDOWN       | Protein(g) + Carbs(g) + Fats(g)             | Amount of seconds to wait after each strike. The higher the value, the slower the fighter |
 | DPS            | ATTACK \* (100% - ENEMY_DEFENCE) / COOLDOWN | Damage per second is used to calculate which fighter runs out of HP first                 |
 | SECONDS_TO_WIN | ENEMY_HP / DPS                              | The amount of seconds it takes for a combatant to defeat its opponent                     |
