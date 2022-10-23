@@ -3,17 +3,9 @@
 Solidabis code challenge 2022 //
 [Solidabis koodihaaste 2022](https://koodihaaste.solidabis.com/intro)
 
+Live demo @ [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)
+
 _Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022_
-
-I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though. Here's a little list of fighters to try out, should you now be familiar with Finnish.
-
-| EN      | FI       |
-| ------- | -------- |
-| apple   | omena    |
-| carrot  | porkkana |
-| tomato  | tomaatti |
-| potato  | peruna   |
-| sausage | makkara  |
 
 ## Introduction
 
@@ -27,6 +19,21 @@ The application must:
 2. Transform nutritional contents into character attributes
 3. Have logic that allows two foodstuffs to duel each other
 4. Present the duel results visually on the front end
+
+This application is hosted on AWS, and available at [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)  
+_Unless I have taken it down..._
+
+I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though. Here's a little list of fighters to try out, should you now be familiar with Finnish.
+
+| EN      | FI       |
+| ------- | -------- |
+| apple   | omena    |
+| carrot  | porkkana |
+| tomato  | tomaatti |
+| potato  | peruna   |
+| sausage | makkara  |
+
+---
 
 ## Infrastructure
 
