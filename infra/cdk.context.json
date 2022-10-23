@@ -2,5 +2,9 @@
   "hosted-zone:account=998999048443:domainName=matiasraisanen.com:region=eu-west-1": {
     "Id": "/hostedzone/ZH34UJKQYBF9C",
     "Name": "matiasraisanen.com."
+  },
+  "hosted-zone:account=998999048443:domainName=matiasraisanen.com:region=us-east-1": {
+    "Id": "/hostedzone/ZH34UJKQYBF9C",
+    "Name": "matiasraisanen.com."
   }
 }

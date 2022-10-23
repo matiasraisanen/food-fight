@@ -11,6 +11,20 @@ paths:
       responses:
         "200":
           description: OK
+  "/static":
+    get:
+      summary: proxy
+      description: Proxy for static website
+      responses:
+        "200":
+          description: OK
+  "/images":
+    get:
+      summary: proxy
+      description: Proxy for static website
+      responses:
+        "200":
+          description: OK
 
   "/api/food-into-stats":
     get:
