@@ -21,4 +21,5 @@ cd static
 npm run build
 cd ..
 
+cd infra
 npx cdk deploy --profile $AWS_PROFILE_NAME --require-approval never --all 
