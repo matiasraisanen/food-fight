@@ -60,7 +60,7 @@ export default function FighterCard({ name, energy, carbs, protein, fat, cooldow
           </Table>
 
           <Button onClick={handleClick} variant="secondary" type="submit" className="mb-2">
-            CHANGE FIGHTER
+            CHANGE
           </Button>
 
 
