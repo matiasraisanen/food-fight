@@ -104,6 +104,12 @@ The combatant with the lower score in `SECONDS_TO_WIN` is the winner!
 
 To avoid the fights taking too long, the outcome is pre-calculated and shown to the user after a 3-second pseudo fight :-)
 
+## Deployment
+
+The application is deployed to AWS via steps listed in [deploy.sh](./deploy.sh)
+
+Should you want to try to deploy the application, you have to change the script to using your own AWS credentials, and also purchase a domain name to be used with the deployment.
+
 ## Final notes
 
 I would like to take part in the koodihaaste competition.  
