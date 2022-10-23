@@ -5,7 +5,7 @@ import type { FetchError, Response } from "node-fetch";
 
 const logger = new Logger({
   serviceName: "FoodIntoStatsLambda",
-  logLevel: "DEBUG",
+  logLevel: "INFO",
 });
 
 interface ResponseError extends Error {
