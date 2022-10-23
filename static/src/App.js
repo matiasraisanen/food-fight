@@ -1,7 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FighterCard from "./components/FighterCard.js";
+import FighterCard from "./components/FighterCard";
 import FightLog from "./components/FightLog";
+import Footer from "./components/Footer"
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 // import { Card, Table } from 'react-bootstrap';
@@ -62,6 +63,10 @@ function App() {
 
       <div>
         <FightLog />
+      </div>
+
+      <div>
+        <Footer />
       </div>
     </div>
   );
