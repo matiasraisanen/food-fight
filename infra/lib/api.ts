@@ -69,7 +69,7 @@ export class Api extends Construct {
     });
 
     new cdk.aws_s3_deployment.BucketDeployment(this, "Deploy", {
-      sources: [cdk.aws_s3_deployment.Source.asset("../static")],
+      sources: [cdk.aws_s3_deployment.Source.asset("../static/build")],
       destinationBucket: bucket,
     });
 
