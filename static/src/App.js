@@ -7,7 +7,17 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 // import { Card, Table } from 'react-bootstrap';
 
+// async function apiCall(foodName,) {
+//   return fetch(`https://koodihaaste.matiasraisanen.com/api/food-into-stats?food=${foodName}`)
+//     .then((res) => res.json())
+//     .then((resJson) => {
+//       console.log(resJson)
+//       return resJson;
+//     });
+// }
+
 function App() {
+  const [nameDisabled, setNameDisabled] = useState(true);
   const [player1, setPlayer1] = useState({
     name: "-",
     energy: "",
@@ -34,29 +44,21 @@ function App() {
       <div className="App-cardZone">
 
         <FighterCard
-          name={player1.name}
-          energy={player1.energy}
-          carbs={player1.carbs}
-          protein={player1.protein}
-          fat={player1.fat}
-          cooldown={player1.cooldown}
+          player={player1}
           playerNo="1"
+          updateParentPlayer={setPlayer1}
         />
 
         <FighterCard
-          name={player2.name}
-          energy={player2.energy}
-          carbs={player2.carbs}
-          protein={player2.protein}
-          fat={player2.fat}
-          cooldown={player2.cooldown}
+          player={player2}
           playerNo="2"
+          updateParentPlayer={setPlayer2}
         />
 
       </div>
 
       <div>
-        <Button variant="danger" size="lg" style={{ color: "black", "font-weight": "bold" }}>
+        <Button variant="danger" size="lg" style={{ color: "black", "fontWeight": "bold" }}>
           FIGHT
         </Button>
       </div>

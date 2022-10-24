@@ -5,8 +5,8 @@ export default function FightLog() {
   return (
     <Card bg="dark" className="fightLog">
       <Card.Header style={{
-        "background-color": "#00ff00", color: "black",
-        "font-weight": "bold", width: "100%"
+        "backgroundColor": "#00ff00", color: "black",
+        "fontWeight": "bold", width: "100%"
       }}>Fight log</Card.Header>
       <Card.Body>
         <p>
