@@ -54,14 +54,17 @@
   justify-content: flex-start;
   background-color: #000;
   border: 1px solid #000;
-  color: #00ff00;
+  color: #c087fa;
   padding: 8px;
   font-family: courier new;
   font-size: calc(1em * 0.8);
 }
 
 .fightLogHeader {
-  background-color: #00ff00;
+  background-color: #9b3cfa;
+  color: black;
+  font-weight: bold;
+  width: 100%;
 }
 
 .footer {
