@@ -34,11 +34,18 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
   const [buttonText, setButtonText] = useState("CHANGE");
   const [isLoading, setIsLoading] = useState(false);
   const [nameDisabled, setNameDisabled] = useState(true);
+  const [placeholder, setPlaceholder] = useState(player.name);
 
   const ref = useRef(null);
 
   const handleClick = async (event) => {
 
+    if (buttonText === "CHANGE") {
+      setInternalPlayer({
+        ...internalPlayer,
+        name: "",
+      });
+    }
     if (buttonText === "SAVE") {
 
       setIsLoading(true)
@@ -54,7 +61,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
       // console.log("New player", newPlayer);
-
+      setPlaceholder(newPlayer.name.toUpperCase());
       setInternalPlayer(newPlayer)
       updateParentPlayer(internalPlayer);
     }
@@ -80,7 +87,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
                 className="text-center"
                 plaintext={nameDisabled}
                 readOnly={nameDisabled}
-                placeholder={internalPlayer.name.toUpperCase()}
+                placeholder={placeholder}
                 onChange={(event) => {
                   setInternalPlayer({
                     ...internalPlayer,
