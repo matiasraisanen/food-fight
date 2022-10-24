@@ -52,9 +52,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
       // console.log("internalPlayer", internalPlayer);
 
       const apiResponse = await apiCall(internalPlayer.name, (() => { setIsLoading(false) }));
-      // TODO: Add error handling for api call
-      if (apiResponse.statusCode === 404) {
-        alert("No data found for given food.")
+
+      if (apiResponse.statusCode !== 200) {
+        alert(apiResponse.message)
         return;
       }
 
