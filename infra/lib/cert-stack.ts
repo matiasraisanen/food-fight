@@ -1,8 +1,5 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
-// import { Api } from "./api";
-// import { StaticSite } from "./website";
-import * as path from "path";
 import { CrossRegionParameter } from "@alma-cdk/cross-region-parameter";
 
 export class CertStack extends cdk.Stack {
@@ -20,10 +17,12 @@ export class CertStack extends cdk.Stack {
       validation: cdk.aws_certificatemanager.CertificateValidation.fromDns(myHostedZone),
     });
 
-    new CrossRegionParameter(this, 'CertificateARN', {
-      region: 'eu-west-1',
-      name: 'CertificateARN',
-      description: 'ARN for subdomain certificate',
+    // We are using ALMA's open sourced helper library here to create a cross region parameter to store the certificate ARN.
+    // This is needed because the certificate is created in us-east-1 and the API Gateway is created in eu-west-1.
+    new CrossRegionParameter(this, "CertificateARN", {
+      region: "eu-west-1",
+      name: "CertificateARN",
+      description: "ARN for subdomain certificate",
       value: certificate.certificateArn,
     });
   }
