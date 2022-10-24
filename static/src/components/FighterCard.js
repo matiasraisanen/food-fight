@@ -40,16 +40,24 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
   const handleClick = async (event) => {
 
     if (buttonText === "SAVE") {
+
       setIsLoading(true)
-      console.log("internalPlayer", internalPlayer);
+      // console.log("internalPlayer", internalPlayer);
+
       const apiResponse = await apiCall(internalPlayer.name, (() => { setIsLoading(false) }));
-      console.log("apiResponseData", apiResponse.data);
+      // TODO: Add error handling for api call
+      if (apiResponse.statusCode === 404) {
+        alert("No data found for given food.")
+        return;
+      }
+
+      // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
-      console.log("New player", newPlayer);
+      // console.log("New player", newPlayer);
+
       setInternalPlayer(newPlayer)
       updateParentPlayer(internalPlayer);
     }
-
     setNameDisabled(!nameDisabled);
     setButtonVariant(buttonVariant === "secondary" ? "success" : "secondary");
     setButtonText(buttonText === "CHANGE" ? "SAVE" : "CHANGE");
@@ -60,7 +68,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
   return (
     <div ref={ref} style={{ padding: '5vh' }}>
       <Card style={{ width: '18rem' }}>
+
         <Card.Img variant="top" src={`./images/p${playerNo}.png`} />
+
         <Card.Header as="h5">
           <Form>
             <Form.Group
@@ -82,7 +92,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
             </Form.Group>
           </Form>
         </Card.Header>
+
         <Card.Body>
+
           <Table striped bordered hover responsive>
             <tbody>
               <tr>
@@ -116,9 +128,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
               </Spinner>}
           </Button>
 
-
         </Card.Body>
       </Card>
+
     </div>
   );
 }
