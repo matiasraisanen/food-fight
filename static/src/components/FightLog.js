@@ -1,7 +1,19 @@
 import { Card } from 'react-bootstrap';
 
 
-export default function FightLog() {
+export default function FightLog(props) {
+
+  const messages = props.messages
+  const messageList = messages.map((message, index) => {
+    return (
+      <Card.Text
+        className="fightLogMessage"
+        key={index}>
+        {message}
+      </Card.Text >
+    )
+  })
+
   return (
     <Card bg="dark" className="fightLog">
       <Card.Header style={{
@@ -9,11 +21,7 @@ export default function FightLog() {
         "fontWeight": "bold", width: "100%"
       }}>Fight log</Card.Header>
       <Card.Body>
-        <p>
-          [12.0s] - [omena] hits [makkara] for 8.000 damage!
-          <br />
-          [12.6s] - [makkara] hits [omena] for 12.000 damage!
-        </p>
+        {messageList}
       </Card.Body>
     </Card>
   )

@@ -18,12 +18,12 @@ function formatResponseData(data, userGivenName) {
   // Let's just use the user given name instead.
   return {
     name: userGivenName.toUpperCase(),
-    energy: data.energy.toFixed(0),
-    carbs: data.carbohydrate.toFixed(1),
-    protein: `${data.protein.toFixed(2)}%`,
+    hp: data.energy.toFixed(0),
+    attack: data.carbohydrate.toFixed(1),
+    defense: data.protein.toFixed(2),
     fat: data.fat.toFixed(0),
     cooldown: data.cooldown.toFixed(2),
-    speed: parseFloat(1 / data.cooldown).toFixed(2),
+    speed: (1 / data.cooldown).toFixed(2),
     dps: (data.carbohydrate / data.cooldown).toFixed(3)
   }
 }
@@ -60,7 +60,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
 
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
-      // console.log("New player", newPlayer);
+      console.log("New player", newPlayer);
       setPlaceholder(newPlayer.name.toUpperCase());
       setInternalPlayer(newPlayer)
       updateParentPlayer(internalPlayer);
@@ -106,15 +106,15 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
             <tbody>
               <tr>
                 <td>HP</td>
-                <td>{internalPlayer.energy}</td>
+                <td>{internalPlayer.hp}</td>
               </tr>
               <tr>
                 <td>DMG</td>
-                <td>{internalPlayer.carbs}</td>
+                <td>{internalPlayer.attack}</td>
               </tr>
               <tr>
                 <td>DEF</td>
-                <td>{internalPlayer.protein}</td>
+                <td>{internalPlayer.defense}%</td>
               </tr>
               <tr>
                 <td>SPEED</td>

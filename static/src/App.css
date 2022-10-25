@@ -45,6 +45,7 @@
 
 .fightLog {
   margin-top: 5vh;
+  margin-bottom: 5vh;
   width: 80vh;
   height: 30vh;
   text-align: left;
@@ -65,6 +66,10 @@
   color: black;
   font-weight: bold;
   width: 100%;
+}
+
+.fightLogMessage {
+  margin-bottom: 0;
 }
 
 .footer {

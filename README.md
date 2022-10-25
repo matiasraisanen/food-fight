@@ -91,24 +91,22 @@ If these conditions cannot be met, we will fall back to just the first item in t
 
 ### Fight logic
 
-| Stat           | Value                                       | Notes                                                                                     |
-| -------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| HP             | Energy (kcal)                               | Total health points                                                                       |
-| ATTACK         | Carbs (g)                                   | Damage per strike                                                                         |
-| DEFENCE (%)    | Protein (g)                                 | Mitigates damage from an incoming strike by a percentage. 1g = 1%                         |
-| COOLDOWN       | Protein(g) + Carbs(g) + Fats(g)             | Amount of seconds to wait after each strike. The higher the value, the slower the fighter |
-| DPS            | ATTACK \* (100% - ENEMY_DEFENCE) / COOLDOWN | Damage per second is used to calculate which fighter runs out of HP first                 |
-| SECONDS_TO_WIN | ENEMY_HP / DPS                              | The amount of seconds it takes for a combatant to defeat its opponent                     |
+| Stat        | Value                                   | Notes                                                                                                                                   |
+| ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| HP          | energy (kcal)                           | Total health points                                                                                                                     |
+| ATTACK      | carbs (g)                               | Damage per strike                                                                                                                       |
+| DEFENCE (%) | protein (g)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
+| COOLDOWN    | protein + carbs + fats = cooldown (sec) | Amount of seconds to wait after each strike. The higher the value, the slower the fighter. This is an internal stat, not shown to user. |
+| DPS         | ATTACK / COOLDOWN                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
+| SPEED       | 1 sec / COOLDOWN                        | Attack speed. Number of attacks per second                                                                                              |
 
-The combatant with the lower score in `SECONDS_TO_WIN` is the winner!
-
-To avoid the fights taking too long, the outcome is pre-calculated and shown to the user after a 3-second pseudo fight :-)
+To avoid the audience getting bored of slow fights, the fights will be carried out at 10x speed :-)
 
 ## Deployment
 
 The application is deployed to AWS via steps listed in [deploy.sh](./deploy.sh)
 
-Should you want to try to deploy the application, you have to change the script to using your own AWS credentials, and also purchase a domain name to be used with the deployment.
+If you want to deploy the application, you have to change the deploy script to use your own AWS credentials, and also purchase a domain name to be used with the deployment.
 
 ## Final notes
 
