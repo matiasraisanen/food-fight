@@ -65,11 +65,17 @@
   background-color: #9b3cfa;
   color: black;
   font-weight: bold;
-  width: 100%;
 }
 
 .fightLogMessage {
   margin-bottom: 0;
+}
+
+.clearButton {
+  position: absolute;
+
+  right: 5px;
+  bottom: 5px;
 }
 
 .footer {

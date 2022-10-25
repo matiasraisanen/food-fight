@@ -120,7 +120,7 @@ function App() {
       </div>
 
       <div>
-        <FightLog messages={messages} />
+        <FightLog messages={messages} clearLog={() => setMessages([])} />
       </div>
 
       <div>

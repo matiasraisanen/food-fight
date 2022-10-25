@@ -1,4 +1,4 @@
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 
 export default function FightLog(props) {
@@ -19,9 +19,12 @@ export default function FightLog(props) {
       <Card.Header style={{
         "backgroundColor": "#9b3cfa", color: "black",
         "fontWeight": "bold", width: "100%"
-      }}>Fight log</Card.Header>
+      }}>Fight log
+
+      </Card.Header>
       <Card.Body>
         {messageList}
+        <Button className="clearButton" size="sm" variant="outline-secondary" onClick={() => props.clearLog()}>clear</Button>
       </Card.Body>
     </Card>
   )
