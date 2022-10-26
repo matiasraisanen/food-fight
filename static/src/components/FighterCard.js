@@ -63,14 +63,14 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
       const apiResponse = await apiCall(internalPlayer.name, (() => { setIsLoading(false) }));
 
       if (apiResponse.statusCode !== 200) {
-        setFightLogMessages(currentState => [...currentState, `Failed to retrieve food: ${apiResponse.message}`])
+        setFightLogMessages(currentState => [`Failed to retrieve food: ${apiResponse.message}`, ...currentState])
 
         setToasterMessage(apiResponse.message)
         setShowToaster(true)
         return;
       }
 
-      setFightLogMessages(currentState => [...currentState, `[${internalPlayer.name}] found in database as [${apiResponse.data.name}]`])
+      setFightLogMessages(currentState => [`${internalPlayer.name}] found in database as [${apiResponse.data.name}]`, ...currentState])
 
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
@@ -105,9 +105,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
           <Form>
             <Form.Group
               className="mb-3"
-              controlId={`formPlayer${playerNo}`}>
+              controlId={`formPlayer${playerNo} `}>
               <Form.Control
-                className={`formControl${blinking ? " blinking" : ""}`}
+                className={`formControl${blinking ? " blinking" : ""} `}
                 plaintext={nameDisabled}
                 readOnly={nameDisabled}
                 ref={inputRef}

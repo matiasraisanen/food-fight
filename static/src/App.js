@@ -36,6 +36,7 @@ function App() {
 
   // Initialize fight log
   const [fightLogMessages, setFightLogMessages] = useState([
+    "--------------------------",
     "Welcome to food fight!",
     'Press "CHANGE" to change fighters',
     'Press "FIGHT" to begin'
@@ -64,7 +65,7 @@ function App() {
 
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
-    setFightLogMessages(currentState => [...currentState, messageString])
+    setFightLogMessages(currentState => [messageString, ...currentState,])
 
     const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
     const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
@@ -74,17 +75,17 @@ function App() {
 
       const damageInflicted = p1.attack * (1 - (p2.defense / 100))
 
-      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.attack}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.attack}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
-      setFightLogMessages(currentState => [...currentState, messageString])
+      setFightLogMessages(currentState => [messageString, ...currentState])
 
       p2.hp -= damageInflicted
 
       if (p2.hp <= 0) {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
-        setFightLogMessages(currentState => [...currentState, `[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`])
-        setFightLogMessages(currentState => [...currentState, `${p1.name} wins!`])
+        setFightLogMessages(currentState => [`[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`, ...currentState])
+        setFightLogMessages(currentState => [`${p1.name} wins!`, ...currentState])
         setFightOngoing(false)
       }
     }
@@ -96,15 +97,15 @@ function App() {
 
       const messageString = `[${timeP2.toFixed(2)}s] - [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] hits [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] for [${p2.attack}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
-      setFightLogMessages(currentState => [...currentState, messageString])
+      setFightLogMessages(currentState => [messageString, ...currentState])
 
       p1.hp -= damageInflicted
 
       if (p1.hp <= 0) {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
-        setFightLogMessages(currentState => [...currentState, `[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`])
-        setFightLogMessages(currentState => [...currentState, `${p2.name} wins!`])
+        setFightLogMessages(currentState => [`[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`, ...currentState])
+        setFightLogMessages(currentState => [`${p2.name} wins!`, ...currentState])
         setFightOngoing(false)
       }
     }
