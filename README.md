@@ -77,7 +77,8 @@ It is hosted on AWS as a static website on an S3 Bucket.
 
 - If no unprocessed version can be found, we will just fall back to the first item in the list.
 
-- Once the user has selected two fighters, they will press "begin" to start the fight.
+- Once the user has selected two fighters, they will press "FIGHT" to start the fight.
+
 - The frontend will then use simple maths to calculate the winner of the food fight, and display the results to the user.
 
 ### Stats logic
