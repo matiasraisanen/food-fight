@@ -37,17 +37,19 @@ I took the liberty of only using English in the project, as I felt it to be more
 
 ## Infrastructure
 
+The application as a whole is hosted on Amazon Web Services
+
 ![Koodihaaste infra](./architecture/architecture.drawio.svg)
 
 ## Back end
 
-The backend is hosted on Amazon Web Services.
-The infra is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code. The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and using a slow GUI is unnecessary.
+The back end is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code. The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and using a without the need to use any slow GUI.
 
 ## Front end
 
-Front end is a simple react app, which implements [React Bootstrap](https://react-bootstrap.github.io/) components.
-It is also hosted on AWS as a static website on an S3 Bucket.
+The front end is a simple react app, created from scratch using [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html) and [React Bootstrap](https://react-bootstrap.github.io/) components.
+
+It is hosted on AWS as a static website on an S3 Bucket.
 
 ## How it works?
 
@@ -75,7 +77,7 @@ It is also hosted on AWS as a static website on an S3 Bucket.
 
 - If no unprocessed version can be found, we will just fall back to the first item in the list.
 
-- Once the user has selected two combatants, they will press "begin" to start the fight.
+- Once the user has selected two fighters, they will press "begin" to start the fight.
 - The frontend will then use simple maths to calculate the winner of the food fight, and display the results to the user.
 
 ### Stats logic
@@ -100,7 +102,7 @@ If these conditions cannot be met, we will fall back to just the first item in t
 | DPS         | ATTACK / COOLDOWN                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
 | SPEED       | 1 sec / COOLDOWN                        | Attack speed. Number of attacks per second                                                                                              |
 
-To avoid the audience getting bored of slow fights, the fights will be carried out at 10x speed :-)
+To avoid the audience getting bored of slow fights, the fights will be carried out at 100x speed :-)
 
 ## Deployment
 
