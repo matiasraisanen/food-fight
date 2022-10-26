@@ -59,8 +59,8 @@ function App() {
     let timeP1 = 0
     let timeP2 = 0
 
-    console.log("p1", p1);
-    console.log("p2", p2);
+    // console.log("p1", p1);
+    // console.log("p2", p2);
 
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
