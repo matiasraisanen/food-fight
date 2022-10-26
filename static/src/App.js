@@ -45,12 +45,18 @@ function App() {
     let timeP1 = 0
     let timeP2 = 0
 
+    console.log("p1", p1);
+    console.log("p2", p2);
+
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
     setMessages(currentState => [...currentState, messageString])
 
-    const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * 100);
-    const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * 100);
+    // fightSpeedMultiplier determines how fast the fights are carried out compared to real time.
+    const fightSpeedMultiplier = 100
+
+    const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
+    const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
 
     function player1Turn() {
       timeP1 += p1.cooldown
@@ -80,7 +86,7 @@ function App() {
 
       setMessages(currentState => [...currentState, messageString])
 
-      p1.hp -= p2.attack * (1 - p1.defense)
+      p1.hp -= damageInflicted
 
       if (p1.hp <= 0) {
         clearInterval(intervalPlayer1)
@@ -102,7 +108,9 @@ function App() {
         <FighterCard
           player={player1}
           playerNo="1"
-          updateParentPlayer={setPlayer1}
+          updateParentPlayer={(player) => setPlayer1(
+            player
+          )}
         />
 
         <FighterCard

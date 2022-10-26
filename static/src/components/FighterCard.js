@@ -1,5 +1,5 @@
 import { Card, Table } from 'react-bootstrap';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
@@ -18,13 +18,13 @@ function formatResponseData(data, userGivenName) {
   // Let's just use the user given name instead.
   return {
     name: userGivenName.toUpperCase(),
-    hp: data.energy.toFixed(0),
-    attack: data.carbohydrate.toFixed(1),
-    defense: data.protein.toFixed(2),
-    fat: data.fat.toFixed(0),
-    cooldown: data.cooldown.toFixed(2),
-    speed: (1 / data.cooldown).toFixed(2),
-    dps: (data.carbohydrate / data.cooldown).toFixed(3)
+    hp: parseInt(data.energy.toFixed(0)),
+    attack: parseFloat(data.carbohydrate.toFixed(1)),
+    defense: parseFloat(data.protein.toFixed(2)),
+    fat: parseFloat(data.fat.toFixed(0)),
+    cooldown: parseFloat(data.cooldown.toFixed(2)),
+    speed: parseFloat((1 / data.cooldown).toFixed(2)),
+    dps: parseFloat((data.carbohydrate / data.cooldown)).toFixed(3)
   }
 }
 export default function FighterCard({ player, playerNo, updateParentPlayer }) {
@@ -34,7 +34,12 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
   const [buttonText, setButtonText] = useState("CHANGE");
   const [isLoading, setIsLoading] = useState(false);
   const [nameDisabled, setNameDisabled] = useState(true);
-  const [placeholder, setPlaceholder] = useState(player.name);
+
+  useEffect(() => {
+    setInternalPlayer(internalPlayer)
+    console.log("Set intP", internalPlayer)
+    // updateParentPlayer(internalPlayer)
+  }, [internalPlayer, updateParentPlayer]);
 
   const ref = useRef(null);
 
@@ -58,12 +63,21 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
         return;
       }
 
-      // console.log("apiResponseData", apiResponse.data);
+      console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
       console.log("New player", newPlayer);
-      setPlaceholder(newPlayer.name.toUpperCase());
-      setInternalPlayer(newPlayer)
-      updateParentPlayer(internalPlayer);
+      setInternalPlayer({
+        name: newPlayer.name,
+        hp: newPlayer.hp,
+        attack: newPlayer.attack,
+        defense: newPlayer.defense,
+        fat: newPlayer.fat,
+        cooldown: newPlayer.cooldown,
+        speed: newPlayer.speed,
+        dps: newPlayer.dps
+      })
+      // console.log("New internalPlayer", internalPlayer);
+      updateParentPlayer(newPlayer);
     }
     setNameDisabled(!nameDisabled);
     setButtonVariant(buttonVariant === "secondary" ? "success" : "secondary");
@@ -87,7 +101,6 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
                 className="text-center"
                 plaintext={nameDisabled}
                 readOnly={nameDisabled}
-                placeholder={placeholder}
                 onChange={(event) => {
                   setInternalPlayer({
                     ...internalPlayer,
