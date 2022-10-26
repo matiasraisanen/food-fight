@@ -1,8 +1,11 @@
-import { Card, Table } from 'react-bootstrap';
 import React, { useState, useRef, useEffect } from 'react';
+
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
+import Table from 'react-bootstrap/Table';
+
 
 async function apiCall(foodName, callBack) {
   return fetch(`https://koodihaaste.matiasraisanen.com/api/food-into-stats?food=${foodName}`)
@@ -27,44 +30,47 @@ function formatResponseData(data, userGivenName) {
     dps: parseFloat((data.carbohydrate / data.cooldown)).toFixed(3)
   }
 }
-export default function FighterCard({ player, playerNo, updateParentPlayer, setMessages }) {
+export default function FighterCard({ player, playerNo, updateParentPlayer, setFightLogMessages, setShowToaster, setToasterMessage }) {
   const [internalPlayer, setInternalPlayer] = useState(player);
 
   const [buttonVariant, setButtonVariant] = useState("secondary");
   const [buttonText, setButtonText] = useState("CHANGE");
   const [isLoading, setIsLoading] = useState(false);
   const [nameDisabled, setNameDisabled] = useState(true);
+  const [blinking, setBlinking] = useState(false);
 
   useEffect(() => {
     setInternalPlayer(internalPlayer)
-    // console.log("Set intP", internalPlayer)
-    // updateParentPlayer(internalPlayer)
   }, [internalPlayer]);
 
-  const ref = useRef(null);
+  const inputRef = useRef(null);
 
   const handleClick = async (event) => {
 
     if (buttonText === "CHANGE") {
+      setBlinking(true)
+      inputRef.current.focus()
       setInternalPlayer({
         ...internalPlayer,
         name: "",
       });
     }
     if (buttonText === "SAVE") {
-
+      setBlinking(false)
       setIsLoading(true)
       // console.log("internalPlayer", internalPlayer);
 
       const apiResponse = await apiCall(internalPlayer.name, (() => { setIsLoading(false) }));
 
       if (apiResponse.statusCode !== 200) {
-        setMessages(currentState => [...currentState, `Failed to retrieve food: ${apiResponse.message}`])
-        alert(apiResponse.message)
+        setFightLogMessages(currentState => [...currentState, `Failed to retrieve food: ${apiResponse.message}`])
+
+        setToasterMessage(apiResponse.message)
+        setShowToaster(true)
         return;
       }
 
-      setMessages(currentState => [...currentState, `[${internalPlayer.name}] found in database as [${apiResponse.data.name}]`])
+      setFightLogMessages(currentState => [...currentState, `[${internalPlayer.name}] found in database as [${apiResponse.data.name}]`])
 
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
@@ -90,7 +96,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setM
 
 
   return (
-    <div ref={ref} style={{ padding: '5vh' }}>
+    <div style={{ padding: '5vh' }}>
       <Card style={{ width: '18rem' }}>
 
         <Card.Img variant="top" src={`./images/p${playerNo}.png`} />
@@ -101,9 +107,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setM
               className="mb-3"
               controlId={`formPlayer${playerNo}`}>
               <Form.Control
-                className="text-center"
+                className={`formControl${blinking ? " blinking" : ""}`}
                 plaintext={nameDisabled}
                 readOnly={nameDisabled}
+                ref={inputRef}
                 onChange={(event) => {
                   setInternalPlayer({
                     ...internalPlayer,

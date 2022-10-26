@@ -1,12 +1,14 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FighterCard from "./components/FighterCard";
-import FightLog from "./components/FightLog";
-import Footer from "./components/Footer"
 import Button from "react-bootstrap/Button";
 import Spinner from 'react-bootstrap/Spinner';
 import { useState } from "react";
 
+import FighterCard from "./components/FighterCard";
+import FightLog from "./components/FightLog";
+import Footer from "./components/Footer"
+import Toaster from "./components/Toaster";
+import Header from "./components/Header";
 
 function App() {
 
@@ -33,15 +35,21 @@ function App() {
   });
 
   // Initialize fight log
-  const [messages, setMessages] = useState([
+  const [fightLogMessages, setFightLogMessages] = useState([
     "Welcome to food fight!",
+    'Press "CHANGE" to change fighters',
+    'Press "FIGHT" to begin'
   ]);
 
   // Used for disabling buttons during fight
   const [fightOngoing, setFightOngoing] = useState(false);
 
   // fightSpeedMultiplier determines how fast the fights are carried out compared to real time. Defaults to 10x
-  const [fightSpeedMultiplier, setFightSpeedMultiplier] = useState(10);
+  const [fightSpeedMultiplier, setFightSpeedMultiplier] = useState(100);
+
+  // Used for displaying error messages
+  const [showToaster, setShowToaster] = useState(false);
+  const [toasterMessage, setToasterMessage] = useState("");
 
   // Fight logic
   const fight = (player1, player2) => {
@@ -56,7 +64,7 @@ function App() {
 
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
-    setMessages(currentState => [...currentState, messageString])
+    setFightLogMessages(currentState => [...currentState, messageString])
 
     const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
     const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
@@ -66,17 +74,17 @@ function App() {
 
       const damageInflicted = p1.attack * (1 - (p2.defense / 100))
 
-      const messageString = `[${timeP1.toFixed(2)}s] - [${p1.name} (${p1.hp.toFixed(0)}hp)] hits [${p2.name} (${p2.hp.toFixed(0)}hp)] for [${p1.attack}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.attack}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
-      setMessages(currentState => [...currentState, messageString])
+      setFightLogMessages(currentState => [...currentState, messageString])
 
       p2.hp -= damageInflicted
 
       if (p2.hp <= 0) {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
-        setMessages(currentState => [...currentState, `[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`])
-        setMessages(currentState => [...currentState, `${p1.name} wins!`])
+        setFightLogMessages(currentState => [...currentState, `[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`])
+        setFightLogMessages(currentState => [...currentState, `${p1.name} wins!`])
         setFightOngoing(false)
       }
     }
@@ -86,27 +94,27 @@ function App() {
 
       const damageInflicted = p2.attack * (1 - (p1.defense / 100))
 
-      const messageString = `[${timeP2.toFixed(2)}s] - [${p2.name} (${p2.hp.toFixed(0)}hp)] hits [${p1.name} (${p1.hp.toFixed(0)}hp)] for [${p2.attack}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+      const messageString = `[${timeP2.toFixed(2)}s] - [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] hits [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] for [${p2.attack}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
-      setMessages(currentState => [...currentState, messageString])
+      setFightLogMessages(currentState => [...currentState, messageString])
 
       p1.hp -= damageInflicted
 
       if (p1.hp <= 0) {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
-        setMessages(currentState => [...currentState, `[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`])
-        setMessages(currentState => [...currentState, `${p2.name} wins!`])
+        setFightLogMessages(currentState => [...currentState, `[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`])
+        setFightLogMessages(currentState => [...currentState, `${p2.name} wins!`])
         setFightOngoing(false)
       }
     }
   }
 
   return (
-    <div className="App">
-      <div className="Title">
-        <h1>FOOD FIGHT</h1>
-      </div>
+    <div className="App" >
+      <Toaster message={toasterMessage} show={showToaster} setShow={setShowToaster} />
+
+      <Header />
 
       <div className="App-cardZone">
 
@@ -114,14 +122,18 @@ function App() {
           player={player1}
           playerNo="1"
           updateParentPlayer={setPlayer1}
-          setMessages={setMessages}
+          setFightLogMessages={setFightLogMessages}
+          setShowToaster={setShowToaster}
+          setToasterMessage={setToasterMessage}
         />
 
         <FighterCard
           player={player2}
           playerNo="2"
           updateParentPlayer={setPlayer2}
-          setMessages={setMessages}
+          setFightLogMessages={setFightLogMessages}
+          setShowToaster={setShowToaster}
+          setToasterMessage={setToasterMessage}
         />
 
       </div>
@@ -137,13 +149,13 @@ function App() {
       </div>
 
       <div>
-        <FightLog messages={messages} clearLog={() => setMessages([])} />
+        <FightLog messages={fightLogMessages} clearLog={() => setFightLogMessages([])} />
       </div>
 
       <div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 }
 
