@@ -46,7 +46,7 @@ The infra is built and deployed using AWS Cloud Development Kit ([AWS CDK](https
 
 ## Front end
 
-Front end is a simple react app, which implements [Material UI](https://mui.com/) components.
+Front end is a simple react app, which implements [React Bootstrap](https://react-bootstrap.github.io/) components.
 It is also hosted on AWS as a static website on an S3 Bucket.
 
 ## How it works?
