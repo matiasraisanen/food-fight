@@ -27,7 +27,7 @@ function formatResponseData(data, userGivenName) {
     dps: parseFloat((data.carbohydrate / data.cooldown)).toFixed(3)
   }
 }
-export default function FighterCard({ player, playerNo, updateParentPlayer }) {
+export default function FighterCard({ player, playerNo, updateParentPlayer, setMessages }) {
   const [internalPlayer, setInternalPlayer] = useState(player);
 
   const [buttonVariant, setButtonVariant] = useState("secondary");
@@ -59,9 +59,12 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
       const apiResponse = await apiCall(internalPlayer.name, (() => { setIsLoading(false) }));
 
       if (apiResponse.statusCode !== 200) {
+        setMessages(currentState => [...currentState, `Failed to retrieve food: ${apiResponse.message}`])
         alert(apiResponse.message)
         return;
       }
+
+      setMessages(currentState => [...currentState, `[${internalPlayer.name}] found in database as [${apiResponse.data.name}]`])
 
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);

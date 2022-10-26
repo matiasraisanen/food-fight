@@ -116,15 +116,15 @@ function App() {
         <FighterCard
           player={player1}
           playerNo="1"
-          updateParentPlayer={(player) => setPlayer1(
-            player
-          )}
+          updateParentPlayer={setPlayer1}
+          setMessages={setMessages}
         />
 
         <FighterCard
           player={player2}
           playerNo="2"
           updateParentPlayer={setPlayer2}
+          setMessages={setMessages}
         />
 
       </div>
