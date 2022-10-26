@@ -6,7 +6,6 @@ import Footer from "./components/Footer"
 import Button from "react-bootstrap/Button";
 import Spinner from 'react-bootstrap/Spinner';
 import { useState } from "react";
-import Form from 'react-bootstrap/Form';
 
 
 function App() {
@@ -58,8 +57,6 @@ function App() {
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
     setMessages(currentState => [...currentState, messageString])
-
-    const fightSpeedMultiplier = 10
 
     const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
     const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
