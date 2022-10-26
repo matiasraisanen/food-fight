@@ -74,8 +74,8 @@
 .clearButton {
   position: absolute;
 
-  right: 5px;
-  bottom: 5px;
+  right: 8px;
+  top: 50px;
 }
 
 .footer {
@@ -126,7 +126,6 @@
 @keyframes blinker {
   50% {
     opacity: 0;
-    background-color: #282c34
+    background-color: #282c34;
   }
 }
-
