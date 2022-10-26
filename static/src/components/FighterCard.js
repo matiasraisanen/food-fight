@@ -37,9 +37,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
 
   useEffect(() => {
     setInternalPlayer(internalPlayer)
-    console.log("Set intP", internalPlayer)
+    // console.log("Set intP", internalPlayer)
     // updateParentPlayer(internalPlayer)
-  }, [internalPlayer, updateParentPlayer]);
+  }, [internalPlayer]);
 
   const ref = useRef(null);
 
@@ -63,9 +63,9 @@ export default function FighterCard({ player, playerNo, updateParentPlayer }) {
         return;
       }
 
-      console.log("apiResponseData", apiResponse.data);
+      // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
-      console.log("New player", newPlayer);
+      // console.log("New player", newPlayer);
       setInternalPlayer({
         name: newPlayer.name,
         hp: newPlayer.hp,
