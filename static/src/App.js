@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import FighterCard from "./components/FighterCard";
 import FightLog from "./components/FightLog";
 import Footer from "./components/Footer"
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Spinner from 'react-bootstrap/Spinner';
 import { useState } from "react";
-
-
+import Form from 'react-bootstrap/Form';
 
 
 function App() {
@@ -38,8 +38,15 @@ function App() {
     "Welcome to food fight!",
   ]);
 
+  // Used for disabling buttons during fight
+  const [fightOngoing, setFightOngoing] = useState(false);
+
+  // fightSpeedMultiplier determines how fast the fights are carried out compared to real time. Defaults to 10x
+  const [fightSpeedMultiplier, setFightSpeedMultiplier] = useState(10);
+
   // Fight logic
   const fight = (player1, player2) => {
+    setFightOngoing(true);
     let p1 = Object.assign({}, player1);
     let p2 = Object.assign({}, player2);
     let timeP1 = 0
@@ -52,8 +59,7 @@ function App() {
 
     setMessages(currentState => [...currentState, messageString])
 
-    // fightSpeedMultiplier determines how fast the fights are carried out compared to real time.
-    const fightSpeedMultiplier = 100
+    const fightSpeedMultiplier = 10
 
     const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
     const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
@@ -74,6 +80,7 @@ function App() {
         clearInterval(intervalPlayer2)
         setMessages(currentState => [...currentState, `[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`])
         setMessages(currentState => [...currentState, `${p1.name} wins!`])
+        setFightOngoing(false)
       }
     }
 
@@ -93,6 +100,7 @@ function App() {
         clearInterval(intervalPlayer2)
         setMessages(currentState => [...currentState, `[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`])
         setMessages(currentState => [...currentState, `${p2.name} wins!`])
+        setFightOngoing(false)
       }
     }
   }
@@ -122,8 +130,12 @@ function App() {
       </div>
 
       <div>
-        <Button onClick={() => fight(player1, player2)} variant="danger" size="lg" style={{ color: "black", "fontWeight": "bold" }}>
-          FIGHT
+        <Button onClick={() => fight(player1, player2)} disabled={fightOngoing} variant="danger" size="lg" style={{ color: "black", "fontWeight": "bold" }}>
+          FIGHT {' '}
+          {fightOngoing &&
+            <Spinner as="span" size="sm" animation="border" role="status" aria-hidden="true">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>}
         </Button>
       </div>
 
