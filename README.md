@@ -94,11 +94,11 @@ If these conditions cannot be met, we will fall back to just the first item in t
 
 ### Fight logic
 
-| Stat        | Value                                   | Notes                                                                                                                                   |
+| Stat        | Amount per 100g                                  | Notes                                                                                                                                   |
 | ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| HP          | energy (kcal)                           | Total health points                                                                                                                     |
-| DAMAGE      | carbs (g)                               | Damage per strike                                                                                                                       |
-| DEFENCE (%) | protein (g)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
+| HP          | energy (1kcal = 1hp)                           | Total health points                                                                                                                     |
+| DAMAGE      | carbs (1g = 1pt)                               | Damage per strike                                                                                                                       |
+| DEFENCE (%) | protein (1g = 1%)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
 | WAIT    | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike. |
 | APS       | 1 sec / WAIT                        |  Number of attacks per second                                                                                              |
 | DPS         | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
