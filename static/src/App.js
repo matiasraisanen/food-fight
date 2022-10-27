@@ -74,6 +74,7 @@ function App() {
     const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
 
     function player1Turn() {
+      const gameSeparator = "===========================>"
       timeP1 += p1.cooldown
 
       const damageInflicted = p1.attack * (1 - (p2.defense / 100))
@@ -88,12 +89,13 @@ function App() {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
         setFightLogMessages(currentState => [`[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`, ...currentState])
-        setFightLogMessages(currentState => [`${p1.name} wins!`, ...currentState])
+        setFightLogMessages(currentState => [ gameSeparator, `${p1.name} wins!`, ...currentState])
         setFightOngoing(false)
       }
     }
 
     function player2Turn() {
+      const gameSeparator = "===========================>"
       timeP2 += p2.cooldown
 
       const damageInflicted = p2.attack * (1 - (p1.defense / 100))
@@ -108,7 +110,7 @@ function App() {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
         setFightLogMessages(currentState => [`[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`, ...currentState])
-        setFightLogMessages(currentState => [`${p2.name} wins!`, ...currentState])
+        setFightLogMessages(currentState => [ gameSeparator, `${p2.name} wins!`, ...currentState])
         setFightOngoing(false)
       }
     }
@@ -120,7 +122,6 @@ function App() {
       
       <Toaster message={toasterMessage} show={showToaster} setShow={setShowToaster} />
       
-
       <div className="App-cardZone">
 
         <FighterCard
@@ -140,9 +141,6 @@ function App() {
           setShowToaster={setShowToaster}
           setToasterMessage={setToasterMessage}
         />
-
-
-
 
       </div>
 
@@ -173,7 +171,7 @@ function App() {
       <div>
         <Footer />
       </div>
-    </div >
+    </div>
   );
 }
 
