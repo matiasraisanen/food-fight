@@ -48,7 +48,7 @@ function App() {
   // Used for disabling buttons during fight
   const [fightOngoing, setFightOngoing] = useState(false);
 
-  // fightSpeedMultiplier determines how fast the fights are carried out compared to real time. Defaults to 10x
+  // fightSpeedMultiplier determines how fast the fights are carried out compared to real time. Defaults to 100x
   const [fightSpeedMultiplier, setFightSpeedMultiplier] = useState(100);
 
   // Used for displaying error messages
@@ -163,8 +163,8 @@ function App() {
               size="sm" 
               animation="border" 
               role="status" 
-              aria-hidden="true"
-             />}
+              aria-hidden="true" />
+          }
         </Button>
       </div>
 
