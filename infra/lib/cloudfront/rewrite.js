@@ -1,7 +1,7 @@
 var path = require("path");
 
 const redirects = {
-  "": { to: "/index.html", statusCode: 200 },
+  // "/": { to: "/index.html", statusCode: 302 },
   // "/redirect-from/example2": { to: "/target2", statusCode: 302 },
 };
 
