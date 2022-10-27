@@ -97,11 +97,11 @@ If these conditions cannot be met, we will fall back to just the first item in t
 | Stat        | Value                                   | Notes                                                                                                                                   |
 | ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | HP          | energy (kcal)                           | Total health points                                                                                                                     |
-| ATTACK      | carbs (g)                               | Damage per strike                                                                                                                       |
+| DAMAGE      | carbs (g)                               | Damage per strike                                                                                                                       |
 | DEFENCE (%) | protein (g)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
-| COOLDOWN    | protein + carbs + fats = cooldown (sec) | Amount of seconds to wait after each strike. The higher the value, the slower the fighter. This is an internal stat, not shown to user. |
-| DPS         | ATTACK / COOLDOWN                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
-| SPEED       | 1 sec / COOLDOWN                        | Attack speed. Number of attacks per second                                                                                              |
+| WAIT    | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike. |
+| APS       | 1 sec / WAIT                        |  Number of attacks per second                                                                                              |
+| DPS         | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
 
 To avoid the audience getting bored of slow fights, the fights will be carried out at 100x speed :-)
 
