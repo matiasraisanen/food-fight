@@ -21,7 +21,8 @@ function App() {
     "fat": 0,
     "cooldown": 3,
     "speed": 0.16,
-    "dps": 0.871
+    "dps": 0.871,
+    "selected": true
   });
   const [player2, setPlayer2] = useState({
     "name": "PAPRIKA",
@@ -31,7 +32,8 @@ function App() {
     "fat": 0,
     "cooldown": 7,
     "speed": 0.16,
-    "dps": 0.817
+    "dps": 0.817,
+    "selected": true
   });
 
   // Initialize fight log
@@ -39,7 +41,8 @@ function App() {
     "--------------------------",
     "Welcome to food fight!",
     'Press "CHANGE" to change fighters',
-    'Press "FIGHT" to begin'
+    'Press "FIGHT" to begin',
+    'Hover over the stats to get a description',
   ]);
 
   // Used for disabling buttons during fight
@@ -80,6 +83,8 @@ function App() {
       setFightLogMessages(currentState => [messageString, ...currentState])
 
       p2.hp -= damageInflicted
+      setPlayer2(p2)
+      console.log(p2)
 
       if (p2.hp <= 0) {
         clearInterval(intervalPlayer1)
@@ -113,9 +118,10 @@ function App() {
 
   return (
     <div className="App" >
-      <Toaster message={toasterMessage} show={showToaster} setShow={setShowToaster} />
-
       <Header />
+      
+      <Toaster message={toasterMessage} show={showToaster} setShow={setShowToaster} />
+      
 
       <div className="App-cardZone">
 
@@ -137,15 +143,28 @@ function App() {
           setToasterMessage={setToasterMessage}
         />
 
+
+
+
       </div>
 
       <div>
-        <Button onClick={() => fight(player1, player2)} disabled={fightOngoing} variant="danger" size="lg" style={{ color: "black", "fontWeight": "bold" }}>
+        <Button 
+        onClick={() => fight(player1, player2)} 
+        disabled={fightOngoing || !player1.selected || !player2.selected} 
+        variant="danger" 
+        size="lg" 
+        style={{ color: "black", "fontWeight": "bold" }}
+        >
           FIGHT {' '}
           {fightOngoing &&
-            <Spinner as="span" size="sm" animation="border" role="status" aria-hidden="true">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>}
+            <Spinner 
+              as="span" 
+              size="sm" 
+              animation="border" 
+              role="status" 
+              aria-hidden="true"
+             />}
         </Button>
       </div>
 
