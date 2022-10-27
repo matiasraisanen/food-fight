@@ -83,8 +83,6 @@ function App() {
       setFightLogMessages(currentState => [messageString, ...currentState])
 
       p2.hp -= damageInflicted
-      setPlayer2(p2)
-      console.log(p2)
 
       if (p2.hp <= 0) {
         clearInterval(intervalPlayer1)
