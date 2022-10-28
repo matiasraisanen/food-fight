@@ -13,12 +13,13 @@ interface ResponseError extends Error {
 }
 
 type foodCharacter = {
-  name: string;
-  energy: number;
-  carbohydrate: number;
-  protein: number;
-  fat: number;
-  cooldown: number;
+  originalName: string;
+  hp: number;
+  damage: number;
+  defense: number;
+  wait: number;
+  aps: number;
+  dps: number;
 };
 
 // Function for parsing food into stats
@@ -52,12 +53,13 @@ async function foodIntoStats(food: string): Promise<foodCharacter | ResponseErro
 
   // Create the player character
   const character: foodCharacter = {
-    name: foodItem.name.fi,
-    energy: foodItem.energyKcal,
-    carbohydrate: foodItem.carbohydrate,
-    protein: foodItem.protein,
-    fat: foodItem.fat,
-    cooldown: foodItem.carbohydrate + foodItem.protein + foodItem.fat,
+    originalName: foodItem.name.fi,
+    hp: foodItem.energyKcal,
+    damage: foodItem.carbohydrate,
+    defense: foodItem.protein,
+    wait: foodItem.carbohydrate + foodItem.protein + foodItem.fat,
+    aps: 1/(foodItem.carbohydrate + foodItem.protein + foodItem.fat),
+    dps: foodItem.carbohydrate / (foodItem.carbohydrate + foodItem.protein + foodItem.fat),
   };
   logger.debug("Player character created", JSON.stringify(character));
   return character;

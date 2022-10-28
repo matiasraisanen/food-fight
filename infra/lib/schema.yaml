@@ -58,26 +58,30 @@ components:
           type: string
           description: Name to which the item is mapped to in Fineli's database
           example: "Omena, ulkomainen, kuorineen"
-        energy:
+        hp:
           type: number
-          description: Energy contents (kcal)
+          description: Health points. 1kcal/100g = 1hp. 
           example: 38.852571462547175
-        carbohydrate:
+        damage:
           type: number
-          description: Carb contents (g)
+          description: Damage per strike. Defined by the carbs per 100g of the food. 1g/100g = 1dmg.
           example: 8.19540006637573
-        protein:
+        defense:
           type: number
-          description: Protein contents (g)
+          description: Protects from damage. Defined by the protein per 100g of the food. 1g/100g = 1% of defense
           example: 0.165299997925758
-        fat:
-          type: number
-          description: Fat contents (g)
-          example: 0.087000001296401
-        cooldown:
+        wait:
           type: number
           description: Cooldown on character attacks (seconds). Value of carbs, proteins and fats summed up together.
           example: 8.447700065597887
+        aps:
+          type: number
+          description: Attacks per second.
+          example: 0.012000480030187978
+        dps:
+          type: number
+          description: Damage per second.
+          example: 0.030961237562320956
     SuccessResponse:
       description: Success response
       type: object

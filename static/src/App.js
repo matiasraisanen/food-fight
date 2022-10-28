@@ -16,22 +16,22 @@ function App() {
   const [player1, setPlayer1] = useState({
     "name": "PORKKANA",
     "hp": 33,
-    "attack": 5.6,
+    "damage": 5.6,
     "defense": 0.63,
     "fat": 0,
-    "cooldown": 3,
-    "speed": 0.16,
+    "wait": 3,
+    "aps": 0.16,
     "dps": 0.871,
     "selected": true
   });
   const [player2, setPlayer2] = useState({
     "name": "PAPRIKA",
     "hp": 30,
-    "attack": 5.1,
+    "damage": 5.1,
     "defense": 0.94,
     "fat": 0,
-    "cooldown": 7,
-    "speed": 0.16,
+    "wait": 7,
+    "aps": 0.16,
     "dps": 0.817,
     "selected": true
   });
@@ -42,7 +42,7 @@ function App() {
     "Welcome to food fight!",
     'Press "CHANGE" to change fighters',
     'Press "FIGHT" to begin',
-    'Hover over the stats to get a description',
+    'Hover over a stat to get its description',
   ]);
 
   // Used for disabling buttons during fight
@@ -70,16 +70,27 @@ function App() {
 
     setFightLogMessages(currentState => [messageString, ...currentState,])
 
-    const intervalPlayer1 = setInterval(player1Turn, p1.cooldown * (1000 / fightSpeedMultiplier));
-    const intervalPlayer2 = setInterval(player2Turn, p2.cooldown * (1000 / fightSpeedMultiplier));
+    const intervalPlayer1 = setInterval(player1Turn, p1.wait * (1000 / fightSpeedMultiplier));
+    const intervalPlayer2 = setInterval(player2Turn, p2.wait * (1000 / fightSpeedMultiplier));
+
+    // TODO: Add a way to stop the fight if it goes on for too long.
+            // msg: "Fight stopped. The crowd got bored of watching..."
+
+    // TODO: Combine p1 and p2 turn functions into one function
+    // TODO: Add a way to change fight speed from UI
+                          // speed["1x", "10x", "100x", "1000x"]
+                        
+    // TODO: Fix bug: pressing ENTER after insterting name glitches out
+
+    // Rumor has it HUNAJA is the toughest fighter...
 
     function player1Turn() {
       const gameSeparator = "===========================>"
-      timeP1 += p1.cooldown
+      timeP1 += p1.wait
 
-      const damageInflicted = p1.attack * (1 - (p2.defense / 100))
+      const damageInflicted = p1.damage * (1 - (p2.defense / 100))
 
-      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.attack}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.damage}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
       setFightLogMessages(currentState => [messageString, ...currentState])
 
@@ -96,11 +107,11 @@ function App() {
 
     function player2Turn() {
       const gameSeparator = "===========================>"
-      timeP2 += p2.cooldown
+      timeP2 += p2.wait
 
-      const damageInflicted = p2.attack * (1 - (p1.defense / 100))
+      const damageInflicted = p2.damage * (1 - (p1.defense / 100))
 
-      const messageString = `[${timeP2.toFixed(2)}s] - [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] hits [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] for [${p2.attack}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+      const messageString = `[${timeP2.toFixed(2)}s] - [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] hits [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] for [${p2.damage}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
 
       setFightLogMessages(currentState => [messageString, ...currentState])
 
