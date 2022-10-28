@@ -57,6 +57,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
   const inputRef = useRef(null);
 
   const handleClick = async (event) => {
+    event.preventDefault();
 
     if (buttonText === "CHANGE") {
       setBlinking(true)
@@ -102,6 +103,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
       // console.log("New internalPlayer", internalPlayer);
       updateParentPlayer(newPlayer);
     }
+
     setNameDisabled(!nameDisabled);
     setButtonVariant(buttonVariant === "secondary" ? "success" : "secondary");
     setButtonText(buttonText === "CHANGE" ? "SAVE" : "CHANGE");
@@ -116,7 +118,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
         <Card.Img variant="top" src={`./images/p${playerNo}.png`} />
 
         <Card.Header as="h5">
-          <Form>
+          <Form onSubmit={handleClick}>
             <Form.Group
               className="mb-3"
               controlId={`formPlayer${playerNo} `}>
