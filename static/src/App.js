@@ -60,71 +60,43 @@ function App() {
     setFightOngoing(true);
     let p1 = Object.assign({}, player1);
     let p2 = Object.assign({}, player2);
-    let timeP1 = 0
-    let timeP2 = 0
-
-    // console.log("p1", p1);
-    // console.log("p2", p2);
-
+    p1.timer = 0;
+    p2.timer = 0;
     let messageString = `[0.00s] - Fight between ${p1.name} and ${p2.name} has begun!`
 
     setFightLogMessages(currentState => [messageString, ...currentState,])
 
-    const intervalPlayer1 = setInterval(player1Turn, p1.wait * (1000 / fightSpeedMultiplier));
-    const intervalPlayer2 = setInterval(player2Turn, p2.wait * (1000 / fightSpeedMultiplier));
+    function playerTurn(attacker, defender) {
+      const gameSeparator = "===========================>"
+      attacker.timer += attacker.wait
+
+      const damageInflicted = attacker.damage * (1 - (defender.defense / 100))
+
+      const messageString = `[${attacker.timer.toFixed(2)}s] - [ ${attacker.name} (${attacker.hp.toFixed(0)}hp) ] hits [ ${defender.name} (${defender.hp.toFixed(0)}hp) ] for [${attacker.damage}-${defender.defense}% = ${damageInflicted.toFixed(2)}] damage!`
+
+      setFightLogMessages(currentState => [messageString, ...currentState])
+
+      defender.hp -= damageInflicted
+
+      if (defender.hp <= 0) {
+        clearInterval(intervalPlayer1)
+        clearInterval(intervalPlayer2)
+        setFightLogMessages(currentState => [`[${attacker.timer.toFixed(2)}s] - ${defender.name} has been defeated!`, ...currentState])
+        setFightLogMessages(currentState => [ gameSeparator, `${attacker.name} wins!`, ...currentState])
+        setFightOngoing(false)
+      }
+    }
+
+    const intervalPlayer1 = setInterval( () => playerTurn(p1, p2), p1.wait * (1000 / fightSpeedMultiplier));
+    const intervalPlayer2 = setInterval( () => playerTurn(p2, p1), p2.wait * (1000 / fightSpeedMultiplier));
 
     // TODO: Add a way to stop the fight if it goes on for too long.
             // msg: "Fight stopped. The crowd got bored of watching..."
 
-    // TODO: Combine p1 and p2 turn functions into one function
     // TODO: Add a way to change fight speed from UI
                           // speed["1x", "10x", "100x", "1000x"]
-                        
-    // TODO: Fix bug: pressing ENTER after insterting name glitches out
 
     // Rumor has it HUNAJA is the toughest fighter...
-
-    function player1Turn() {
-      const gameSeparator = "===========================>"
-      timeP1 += p1.wait
-
-      const damageInflicted = p1.damage * (1 - (p2.defense / 100))
-
-      const messageString = `[${timeP1.toFixed(2)}s] - [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] hits [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] for [${p1.damage}-${p2.defense}% = ${damageInflicted.toFixed(2)}] damage!`
-
-      setFightLogMessages(currentState => [messageString, ...currentState])
-
-      p2.hp -= damageInflicted
-
-      if (p2.hp <= 0) {
-        clearInterval(intervalPlayer1)
-        clearInterval(intervalPlayer2)
-        setFightLogMessages(currentState => [`[${timeP1.toFixed(2)}s] - ${p2.name} has been defeated!`, ...currentState])
-        setFightLogMessages(currentState => [ gameSeparator, `${p1.name} wins!`, ...currentState])
-        setFightOngoing(false)
-      }
-    }
-
-    function player2Turn() {
-      const gameSeparator = "===========================>"
-      timeP2 += p2.wait
-
-      const damageInflicted = p2.damage * (1 - (p1.defense / 100))
-
-      const messageString = `[${timeP2.toFixed(2)}s] - [ ${p2.name} (${p2.hp.toFixed(0)}hp) ] hits [ ${p1.name} (${p1.hp.toFixed(0)}hp) ] for [${p2.damage}-${p1.defense}% = ${damageInflicted.toFixed(2)}] damage!`
-
-      setFightLogMessages(currentState => [messageString, ...currentState])
-
-      p1.hp -= damageInflicted
-
-      if (p1.hp <= 0) {
-        clearInterval(intervalPlayer1)
-        clearInterval(intervalPlayer2)
-        setFightLogMessages(currentState => [`[${timeP2.toFixed(2)}s] - ${p1.name} has been defeated!`, ...currentState])
-        setFightLogMessages(currentState => [ gameSeparator, `${p2.name} wins!`, ...currentState])
-        setFightOngoing(false)
-      }
-    }
   }
 
   return (
