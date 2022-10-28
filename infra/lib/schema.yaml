@@ -60,15 +60,15 @@ components:
           example: "Omena, ulkomainen, kuorineen"
         hp:
           type: number
-          description: Health points. 1kcal/100g = 1hp. 
+          description: Health points. 1kcal in 100g = 1hp. 
           example: 38.852571462547175
         damage:
           type: number
-          description: Damage per strike. Defined by the carbs per 100g of the food. 1g/100g = 1dmg.
+          description: Damage per strike. Defined by the carbs per 100g of the food. 1g in 100g = 1dmg.
           example: 8.19540006637573
         defense:
           type: number
-          description: Protects from damage. Defined by the protein per 100g of the food. 1g/100g = 1% of defense
+          description: Protects from damage. Defined by the protein per 100g of the food. 1g in 100g = 1% of defense
           example: 0.165299997925758
         wait:
           type: number
