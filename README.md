@@ -23,7 +23,10 @@ The application must:
 This application is hosted on AWS, and available at [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)  
 _Unless I have taken it down..._
 
-I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though. Here's a little list of fighters to try out.
+I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though. 
+
+
+Here's a little list of fighters to try out.
 
 | EN      | FI       |
 | ------- | -------- |
@@ -65,12 +68,13 @@ It is hosted on AWS as a static website on an S3 Bucket.
     "statusCode": 200,
     "message": "success",
     "data": {
-      "name": "Omena, ulkomainen, kuorineen",
-      "energy": 38.852571462547175,
-      "carbohydrate": 8.19540006637573,
-      "protein": 0.165299997925758,
-      "fat": 0.087000001296401,
-      "cooldown": 8.447700065597887
+        "originalName": "Omena, ulkomainen, kuorineen",
+        "hp": 38.852571462547175,
+        "damage": 8.19540006637573,
+        "defense": 0.165299997925758,
+        "wait": 8.447700065597887,
+        "aps": 0.1183754148744419,
+        "dps": 0.9701338829192556
     }
   }
   ```
@@ -98,7 +102,7 @@ If these conditions cannot be met, we will fall back to just the first item in t
 | ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | HP          | energy (1kcal = 1hp)                           | Total health points                                                                                                                     |
 | DAMAGE      | carbs (1g = 1pt)                               | Damage per strike                                                                                                                       |
-| DEFENCE (%) | protein (1g = 1%)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
+| DEFENSE (%) | protein (1g = 1%)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
 | WAIT    | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike. |
 | APS       | 1 sec / WAIT                        |  Number of attacks per second                                                                                              |
 | DPS         | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
