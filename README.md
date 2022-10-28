@@ -111,9 +111,9 @@ If these conditions cannot be met, we will fall back to just the first item in t
 
 ## Fight logic
 
-After the user presses "fight", the figthers will keep firing attacks against each other as quickly as their wait time allows.
+After the user presses "fight", the fighters will keep firing attacks against each other at intervals defined by their wait time.
 
-Damage from a single attack will be mitigated by the target's defence, and the remaining damage points will be deducted from the target's HP.
+Damage from a single attack will be mitigated by the target's defense, after which the remaining damage points will be deducted from the target's HP.
 
 Whoever runs out of HP first loses.
 
