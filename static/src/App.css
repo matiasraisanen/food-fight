@@ -46,7 +46,8 @@
 .fightLog {
   margin-top: 5vh;
   margin-bottom: 5vh;
-  width: 80vh;
+  width: 50vw;
+  min-width: 500px!important;
   height: 30vh;
   text-align: left;
   display: flex;
