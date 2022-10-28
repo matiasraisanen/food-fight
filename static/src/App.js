@@ -96,7 +96,6 @@ function App() {
     // TODO: Add a way to change fight speed from UI
                           // speed["1x", "10x", "100x", "1000x"]
 
-    // Rumor has it HUNAJA is the toughest fighter...
   }
 
   return (
