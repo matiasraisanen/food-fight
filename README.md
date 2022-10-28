@@ -46,7 +46,7 @@ The application as a whole is hosted on Amazon Web Services
 
 ## Back end
 
-The back end is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code. The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and using a without the need to use any slow GUI.
+The back end is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code. The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and without the need to use any slow GUI.
 
 ## Front end
 
