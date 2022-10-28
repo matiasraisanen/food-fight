@@ -146,7 +146,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250}} 
                 placement="left" 
-                overlay={popover("HP", ["Health points.", "kcal/100g = HP"])}
+                overlay={popover("HP", ["Health points.", "kcal in 100g = HP"])}
                 >
                   <td>HP</td>
                 </OverlayTrigger>
@@ -157,7 +157,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("DMG", ["Damage inflicted per strike.", "carbs/100g = damage"])}
+                overlay={popover("DMG", ["Damage inflicted per strike.", "carbs in 100g = damage"])}
                 >
                   <td>DMG</td>
                 </OverlayTrigger>
@@ -168,7 +168,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("DEF", ["Defense reduces damage from an incoming attack by a percentage.", "protein/100g = defense%"])}
+                overlay={popover("DEF", ["Defense reduces damage from an incoming attack by a percentage.", "protein in 100g = defense%"])}
                 >
                   <td>DEF</td>
                 </OverlayTrigger>
@@ -179,7 +179,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("WAIT", ["Amount of seconds to wait between attacks.", "(carbs+protein+fat)/100g = wait"])}
+                overlay={popover("WAIT", ["Amount of seconds to wait between attacks.", "(carbs+protein+fat) in 100g = wait"])}
                 >
                   <td>WAIT</td>
                 </OverlayTrigger>
