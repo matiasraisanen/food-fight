@@ -96,16 +96,26 @@ item.type.code = "FOOD" && item.preparationMethod[0].code = "RAW"
 
 If these conditions cannot be met, we will fall back to just the first item in the list.
 
-### Fight logic
+## Character stats
 
-| Stat        | Amount per 100g                                  | Notes                                                                                                                                   |
+| Stat        | Formula                                  | Notes                                                                                                                                   |
 | ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Original Name          |                            | Name of the food item in Fineli's database                                                                                                                     |
 | HP          | energy (1kcal = 1hp)                           | Total health points                                                                                                                     |
 | DAMAGE      | carbs (1g = 1pt)                               | Damage per strike                                                                                                                       |
 | DEFENSE (%) | protein (1g = 1%)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
 | WAIT    | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike. |
 | APS       | 1 sec / WAIT                        |  Number of attacks per second                                                                                              |
 | DPS         | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
+
+
+## Fight logic
+
+After the user presses "fight", the figthers will keep firing attacks against each other as quickly as their wait time allows.
+
+Damage from a single attack will be mitigated by the target's defence, and the remaining damage points will be deducted from the target's HP.
+
+Whoever runs out of HP first loses.
 
 To avoid the audience getting bored of slow fights, the fights will be carried out at 100x speed :-)
 
