@@ -12,7 +12,8 @@ const popover = (title, content) => (
   <Popover id="popover-basic">
     <Popover.Header as="h3">{title}</Popover.Header>
     <Popover.Body>
-      {content}
+      <p>{content[0]}</p>
+      <p><b>{content[1]}</b></p>
     </Popover.Body>
   </Popover>
 );
@@ -84,7 +85,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
         return;
       }
 
-      setFightLogMessages(currentState => [`Changed player ${playerNo} to [${internalPlayer.name}]. Found in database as [${apiResponse.data.name}]`, ...currentState])
+      setFightLogMessages(currentState => [`Changed player ${playerNo} to [${internalPlayer.name}]. Found in database as [${apiResponse.data.originalName}]`, ...currentState])
 
       // console.log("apiResponseData", apiResponse.data);
       const newPlayer = formatResponseData(apiResponse.data, internalPlayer.name);
@@ -92,11 +93,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
       setInternalPlayer({
         name: newPlayer.name,
         hp: newPlayer.hp,
-        attack: newPlayer.attack,
+        damage: newPlayer.damage,
         defense: newPlayer.defense,
-        fat: newPlayer.fat,
-        cooldown: newPlayer.cooldown,
-        speed: newPlayer.speed,
+        wait: newPlayer.wait,
+        aps: newPlayer.aps,
         dps: newPlayer.dps
       })
       // console.log("New internalPlayer", internalPlayer);
@@ -146,7 +146,7 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250}} 
                 placement="left" 
-                overlay={popover("HP", "Health points.")}
+                overlay={popover("HP", ["Health points.", "kcal/100g = HP"])}
                 >
                   <td>HP</td>
                 </OverlayTrigger>
@@ -157,18 +157,18 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("DMG", "Damage inflicted per strike.")}
+                overlay={popover("DMG", ["Damage inflicted per strike.", "carbs/100g = damage"])}
                 >
                   <td>DMG</td>
                 </OverlayTrigger>
-                <td>{internalPlayer.attack}</td>
+                <td>{internalPlayer.damage}</td>
               </tr>
 
               <tr>
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("DEF", "Defense reduces damage from an incoming attack by a percentage.")}
+                overlay={popover("DEF", ["Defense reduces damage from an incoming attack by a percentage.", "protein/100g = defense%"])}
                 >
                   <td>DEF</td>
                 </OverlayTrigger>
@@ -179,29 +179,29 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("WAIT", "Amount of seconds to wait between attacks.")}
+                overlay={popover("WAIT", ["Amount of seconds to wait between attacks.", "(carbs+protein+fat)/100g = wait"])}
                 >
                   <td>WAIT</td>
                 </OverlayTrigger>
-                <td>{internalPlayer.cooldown}s</td>
+                <td>{internalPlayer.wait}s</td>
               </tr>
 
               <tr>
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("APS", "Attacks per second.")}
+                overlay={popover("APS", ["Attacks per second."])}
                 >
                   <td>APS</td>
                 </OverlayTrigger>
-                <td>{internalPlayer.speed}</td>
+                <td>{internalPlayer.aps}</td>
               </tr>
 
               <tr>
                 <OverlayTrigger 
                 delay={{ show: 250 }} 
                 placement="left" 
-                overlay={popover("DPS", "Average damage inflicted per second.")}
+                overlay={popover("DPS", ["Average damage inflicted per second."])}
                 >
                   <td>DPS</td>
                 </OverlayTrigger>
