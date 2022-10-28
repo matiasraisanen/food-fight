@@ -31,13 +31,12 @@ function formatResponseData(data, userGivenName) {
   // Let's just use the user given name instead.
   return {
     name: userGivenName.toUpperCase(),
-    hp: parseInt(data.energy.toFixed(0)),
-    attack: parseFloat(data.carbohydrate.toFixed(1)),
-    defense: parseFloat(data.protein.toFixed(2)),
-    fat: parseFloat(data.fat.toFixed(0)),
-    cooldown: parseFloat(data.cooldown.toFixed(2)),
-    speed: parseFloat((1 / data.cooldown).toFixed(2)),
-    dps: parseFloat((data.carbohydrate / data.cooldown)).toFixed(3),
+    hp: parseInt(data.hp.toFixed(0)),
+    damage: parseFloat(data.damage.toFixed(1)),
+    defense: parseFloat(data.defense.toFixed(2)),
+    wait: parseFloat(data.wait.toFixed(2)),
+    aps: parseFloat(data.aps.toFixed(3)),
+    dps: parseFloat(data.dps.toFixed(3)),
     selected: true
   }
 }
