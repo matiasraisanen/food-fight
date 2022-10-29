@@ -9,15 +9,16 @@ N='\033[0m'    # Neutral
 
 printf "${G}\n"
 printf "   ╓── DEPLOY SCRIPT FOR KOODIHAASTE APPLICATION\n"
-printf "   ║\n"
+printf "   ║ Automated steps:\n"
 printf "   ╠═> 1. Run tests\n"
 printf "   ╠══> 2. Build static website\n"
-printf "   ╚═══> 3. Deploy application to AWS\n"
+printf "   ╠═══> 3. Deploy application to AWS\n"
+printf "   ╚════> 4. Run e2e tests\n"
 printf "${N}\n"
 
 
 # Run all tests
-(cd infra && npm run test)
+(cd infra && npm run test Infrastructure && npm run test Application)
 
 # Build static website
 (cd static && npm run build)
@@ -27,4 +28,7 @@ printf "${N}\n"
 ### Setup AWS profile name
 AWS_PROFILE_NAME="myPersonalAws"
 
-(cd infra && npx cdk deploy --profile $AWS_PROFILE_NAME --require-approval never --all )
+(cd infra && npx cdk deploy --outputs-file ./outputs/cfnOutputs.json --profile $AWS_PROFILE_NAME --require-approval never --all)
+
+# Run e2e test after deployment
+(npm run test End-to-end)
