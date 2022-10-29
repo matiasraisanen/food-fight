@@ -39,6 +39,11 @@ export class ApiStack extends cdk.Stack {
       value: apiGateway.restApiId,
     });
 
+    new cdk.CfnOutput(this, "ApiGatewayApiURL", {
+      exportName: "ApiGatewayApiURL",
+      value: apiGateway.url,
+    });
+
     // Output API Gateway deployment stage name for cloudfront
     new cdk.CfnOutput(this, "ApiGatewayDeploymentStage", {
       exportName: "ApiGatewayDeploymentStage",
