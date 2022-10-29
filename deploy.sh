@@ -8,7 +8,7 @@ G='\033[0;32m' # Green
 N='\033[0m'    # Neutral
 
 printf "${G}\n"
-printf "   ╓── DEPLOY SCRIPT FOR KOODIHAASTE APPLICATION\n"
+printf "   ╓── DEPLOYMENT SCRIPT FOR KOODIHAASTE APPLICATION\n"
 printf "   ║ Automated steps:\n"
 printf "   ╠═> 1. Run tests\n"
 printf "   ╠══> 2. Build static website\n"
@@ -31,4 +31,4 @@ AWS_PROFILE_NAME="myPersonalAws"
 (cd infra && npx cdk deploy --outputs-file ./outputs/cfnOutputs.json --profile $AWS_PROFILE_NAME --require-approval never --all)
 
 # Run e2e test after deployment
-(npm run test End-to-end)
+(cd infra && npm run test End-to-end)
