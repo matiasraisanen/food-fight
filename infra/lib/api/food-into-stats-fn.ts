@@ -12,7 +12,7 @@ interface ResponseError extends Error {
   code?: number;
 }
 
-type foodCharacter = {
+export interface FoodCharacter {
   originalName: string;
   hp: number;
   damage: number;
@@ -20,10 +20,10 @@ type foodCharacter = {
   wait: number;
   aps: number;
   dps: number;
-};
+}
 
 // Function for parsing food into stats
-async function foodIntoStats(food: string): Promise<foodCharacter | ResponseError> {
+export async function foodIntoStats(food: string): Promise<FoodCharacter | ResponseError> {
   // Get nutritional information from the Food API
   const response: any = await fetch(`https://fineli.fi/fineli/api/v1/foods?q=${food}`, {
     method: "GET",
@@ -31,7 +31,6 @@ async function foodIntoStats(food: string): Promise<foodCharacter | ResponseErro
     .then((res: Response) => res.json())
     .catch((err: FetchError) => logger.error("Error during fetch", err as ResponseError));
 
-  // try {
   logger.debug(`Response length from Food API: ${response.length}`);
   if (response.length == 0) {
     let err = new Error(`No food called '${food}' found in Fineli`) as ResponseError;
@@ -52,20 +51,20 @@ async function foodIntoStats(food: string): Promise<foodCharacter | ResponseErro
   }
 
   // Create the player character
-  const character: foodCharacter = {
+  const character: FoodCharacter = {
     originalName: foodItem.name.fi,
     hp: foodItem.energyKcal,
     damage: foodItem.carbohydrate,
     defense: foodItem.protein,
     wait: foodItem.carbohydrate + foodItem.protein + foodItem.fat,
-    aps: 1/(foodItem.carbohydrate + foodItem.protein + foodItem.fat),
+    aps: 1 / (foodItem.carbohydrate + foodItem.protein + foodItem.fat),
     dps: foodItem.carbohydrate / (foodItem.carbohydrate + foodItem.protein + foodItem.fat),
   };
   logger.debug("Player character created", JSON.stringify(character));
   return character;
 }
 
-exports.handler = async (event: APIGatewayEvent, context: Context) => {
+export const handler = async (event: APIGatewayEvent, context: Context) => {
   let food: string;
 
   try {
