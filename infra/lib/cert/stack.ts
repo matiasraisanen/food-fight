@@ -17,6 +17,11 @@ export class CertStack extends cdk.Stack {
       validation: cdk.aws_certificatemanager.CertificateValidation.fromDns(myHostedZone),
     });
 
+    // Output certificate ARN for cloudfront
+    // new cdk.CfnOutput(this, "CertificateARN", {
+    //   value: apiGateway.deploymentStage.stageName,
+    // });
+
     // We are using ALMA's open sourced helper library here to create a cross region parameter to store the certificate ARN.
     // This is needed because the certificate is created in us-east-1 and the API Gateway is created in eu-west-1.
     new CrossRegionParameter(this, "CertificateARN", {
