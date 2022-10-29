@@ -25,7 +25,7 @@ const staticWebsiteStack = new StaticWebsiteStack(
   ENV_EU_WEST_1
 );
 
-const apiStack = new ApiStack(app, "KoodihaasteInfraStack", ENV_EU_WEST_1);
+const apiStack = new ApiStack(app, "KoodihaasteApiStack", ENV_EU_WEST_1);
 
 const cloudfrontStack = new CloudFrontStack(app, "KoodihaasteCloudFrontStack", ENV_EU_WEST_1);
 
