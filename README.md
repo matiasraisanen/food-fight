@@ -1,5 +1,7 @@
 # Food Fight 2022
 
+This is a web application in which two foodstuffs duel each other :-)
+
 Live demo @ [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)
 
 ## Introduction
