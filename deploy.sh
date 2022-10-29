@@ -24,7 +24,6 @@ printf "${N}\n"
 (cd static && npm run build)
 
 # Deploy application to AWS
-
 ### Setup AWS profile name
 AWS_PROFILE_NAME="myPersonalAws"
 
