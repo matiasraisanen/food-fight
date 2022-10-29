@@ -11,7 +11,7 @@ The objective of this project is to take part in Solidabis code challenge 2022 /
 
 _Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022_
 
-In it, the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other.
+In the challenge the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other.
 
 The application must:
 
