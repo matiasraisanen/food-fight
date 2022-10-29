@@ -1,15 +1,13 @@
-# Solidabis Koodihaaste 2022
-
-Solidabis code challenge 2022 //
-[Solidabis koodihaaste 2022](https://koodihaaste.solidabis.com/intro)
-
-_Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022_
+# Food Fight 2022
 
 Live demo @ [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)
 
 ## Introduction
 
-The objective of this project is to take part in Solidabis code challenge 2022.
+The objective of this project is to take part in Solidabis code challenge 2022 //
+[Solidabis koodihaaste 2022](https://koodihaaste.solidabis.com/intro)
+
+_Should the above URL be unavailable or updated, check [this snapshot](https://web.archive.org/web/20221011125550/https://koodihaaste.solidabis.com) on the Wayback Machine from 11-Oct-2022_
 
 In it, the developer must create a fullstack application, in which a user can select two foodstuffs to "fight" each other.
 
@@ -23,8 +21,7 @@ The application must:
 This application is hosted on AWS, and available at [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)  
 _Unless I have taken it down..._
 
-I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though. 
-
+I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though.
 
 Here's a little list of fighters to try out.
 
@@ -68,13 +65,13 @@ It is hosted on AWS as a static website on an S3 Bucket.
     "statusCode": 200,
     "message": "success",
     "data": {
-        "originalName": "Omena, ulkomainen, kuorineen",
-        "hp": 38.852571462547175,
-        "damage": 8.19540006637573,
-        "defense": 0.165299997925758,
-        "wait": 8.447700065597887,
-        "aps": 0.1183754148744419,
-        "dps": 0.9701338829192556
+      "originalName": "Omena, ulkomainen, kuorineen",
+      "hp": 38.852571462547175,
+      "damage": 8.19540006637573,
+      "defense": 0.165299997925758,
+      "wait": 8.447700065597887,
+      "aps": 0.1183754148744419,
+      "dps": 0.9701338829192556
     }
   }
   ```
@@ -98,16 +95,15 @@ If these conditions cannot be met, we will fall back to just the first item in t
 
 ## Character stats
 
-| Stat        | Formula                                  | Notes                                                                                                                                   |
-| ----------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Original Name          |                            | Name of the food item in Fineli's database                                                                                                                     |
-| HP          | energy (1kcal = 1hp)                           | Total health points                                                                                                                     |
-| DAMAGE      | carbs (1g = 1pt)                               | Damage per strike                                                                                                                       |
-| DEFENSE (%) | protein (1g = 1%)                             | Mitigates damage from an incoming strike by a percentage. 1g = 1%                                                                       |
-| WAIT    | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike. |
-| APS       | 1 sec / WAIT                        |  Number of attacks per second                                                                                              |
-| DPS         | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat                                                                          |
-
+| Stat          | Formula                             | Notes                                                             |
+| ------------- | ----------------------------------- | ----------------------------------------------------------------- |
+| Original Name |                                     | Name of the food item in Fineli's database                        |
+| HP            | energy (1kcal = 1hp)                | Total health points                                               |
+| DAMAGE        | carbs (1g = 1pt)                    | Damage per strike                                                 |
+| DEFENSE (%)   | protein (1g = 1%)                   | Mitigates damage from an incoming strike by a percentage. 1g = 1% |
+| WAIT          | protein + carbs + fats = WAIT (sec) | Amount of seconds to wait after each strike.                      |
+| APS           | 1 sec / WAIT                        | Number of attacks per second                                      |
+| DPS           | DAMAGE / WAIT                       | Damage per second. Not used for logic, but a nice to know stat    |
 
 ## Fight logic
 

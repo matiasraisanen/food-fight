@@ -9,7 +9,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     const staticBucket = new cdk.aws_s3.Bucket(this, "Bucket", {
       publicReadAccess: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
-      bucketName: "solidabis-koodihaaste-2022-bucket",
+      bucketName: "food-fight-2022-bucket",
       autoDeleteObjects: true,
     });
 
