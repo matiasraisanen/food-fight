@@ -19,7 +19,9 @@ describe("End-to-End", () => {
 
     // Set the API url
     apiUrl = `${apiDomain}/api/food-into-stats`;
+  });
 
+  beforeEach(() => {
     // Requests can sometimes take more than default 5 seconds
     jest.setTimeout(10000);
   });
