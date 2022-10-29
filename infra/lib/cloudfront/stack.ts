@@ -105,7 +105,7 @@ export class CloudFrontStack extends cdk.Stack {
       ],
     });
 
-    // Create a CNAME record for the distribution
+    // Create an A record for the distribution
     new cdk.aws_route53.ARecord(this, "DomainNameAliasRecord", {
       zone: myHostedZone,
       recordName: subDomainName,
