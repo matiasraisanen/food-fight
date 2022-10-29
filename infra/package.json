@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
+    "test": "jest --config jest.config.js -t",
     "cdk": "cdk"
   },
   "devDependencies": {
