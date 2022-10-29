@@ -4,7 +4,7 @@ import { createCdkTestContext } from "../../../__test__/test-context-provider";
 import { CertStack } from "../stack";
 
 describe("Infrastructure", () => {
-  describe("ApiStack", () => {
+  describe("CertStack", () => {
     const tc = createCdkTestContext();
     const apiStack = new CertStack(tc, "TestStack", {
       env: { account: "123456789012", region: "eu-west-1" },
