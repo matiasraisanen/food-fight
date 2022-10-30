@@ -49,7 +49,7 @@ function App() {
   const [fightOngoing, setFightOngoing] = useState(false);
 
   // fightSpeedMultiplier determines how fast the fights are carried out compared to real time. Defaults to 100x
-  const [fightSpeedMultiplier, setFightSpeedMultiplier] = useState(100);
+  const [fightSpeedMultiplier] = useState(100);
 
   // Used for displaying error messages
   const [showToaster, setShowToaster] = useState(false);

@@ -1,10 +1,8 @@
 import Alert from 'react-bootstrap/Alert';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-import { useState } from "react";
 
 export default function Toaster({ message, show, setShow }) {
-  // const [show, setShow] = useState(true);
   return (
 
     <ToastContainer className="p-3" position='top-center'>
