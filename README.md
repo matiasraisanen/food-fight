@@ -66,6 +66,13 @@ The front end is a simple react app, created from scratch using [create-react-ap
 
 It is hosted on AWS as a static website on an S3 Bucket.
 
+## CI/CD
+
+The application has an automated CI/CD-pipeline using [Github actions](https://github.com/features/actions).
+
+Every tagged release on Github will launch a [deployment](./.github/workflows/deploy.yaml).
+The pipeline can also be run manually, using a workflow dispatch.
+
 ## How it works?
 
 - On the front end, the user will type a food into a search box and press "submit".
@@ -129,7 +136,7 @@ To avoid the audience getting bored of slow fights, the fights will be carried o
 
 ## Deployment
 
-The application is built and deployed to AWS using the [deploy script](./deploy.sh)
+Additionally to the automated CI/CD pipeline, the application can also be deployed from the local machine using the [deploy script](./deploy.sh)
 
 `bash ./deploy.sh`
 
