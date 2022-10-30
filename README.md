@@ -33,9 +33,10 @@ The application must:
 3. Have logic that allows two foodstuffs to duel each other
 4. Present the duel results visually on the front end
 
-I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though.
+I took the liberty of only using English in the project.  
+Fighter names (food items) will be Finnish though.
 
-Here's a little list of fighters to try out.
+Here's a little list of some fighters to try out.
 
 | EN      | FI       |
 | ------- | -------- |
