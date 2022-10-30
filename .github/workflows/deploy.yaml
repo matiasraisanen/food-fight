@@ -14,14 +14,14 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Uses Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: 16
           architecture: "arm64"
       - name: Cache Node.js modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -29,7 +29,7 @@ jobs:
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.aws_access_key_id }}
           aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
