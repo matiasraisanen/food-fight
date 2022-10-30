@@ -35,6 +35,18 @@ Here's a little list of fighters to try out.
 | potato  | peruna   |
 | sausage | makkara  |
 
+## Local development
+
+You can run this application's frontend locally:  
+`cd static && npm i && npm run start`
+
+Local test can be run like so:  
+`npm run test`
+
+The local version will still contact the actual production backend on AWS.
+
+Backend can be deployed using CDK from under `infra` folder, but in order for it to be work you need to configure your AWS credentials, which I will not go into here.
+
 ---
 
 ## Infrastructure
@@ -45,7 +57,11 @@ The application as a whole is hosted on Amazon Web Services
 
 ## Back end
 
-The back end is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code. The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and without the need to use any slow GUI.
+The back end is built and deployed using AWS Cloud Development Kit ([AWS CDK](https://aws.amazon.com/cdk/)), which lets the developer define the infrastructure as code.
+
+The benefit here is that making changes to deployed infrastructure is easy, as it can be done through code and without the need to use any slow GUI.
+
+CDK supports multiple programming languages, and I chose [TypeScript](https://www.typescriptlang.org/) as my language of choice. Its types bring some extra safety to writing complex web applications and lets me catch errors early.
 
 ## Front end
 
@@ -60,7 +76,15 @@ It is hosted on AWS as a static website on an S3 Bucket.
 - The frontend will call API Gateway, which will forward the request to a lambda function
 - The lambda function will call **Fineli foods API** with the requested food.
 - Fineli responds with an array of all the items it found in its database.
-- The lambda function will then try to find the food item in its most unprocessed form, and return its nutritional stats to the front end.
+- The lambda function will then try to find the food item in its most unprocessed and raw form.
+
+```javascript
+item.type.code = "FOOD" && item.preparationMethod[0].code = "RAW"
+```
+
+- If no unprocessed version can be found, we will just fall back to the first item in the list.
+
+- The lambda function then converts the response into fighter stats.
 
   ```json
   {
@@ -78,22 +102,16 @@ It is hosted on AWS as a static website on an S3 Bucket.
   }
   ```
 
-- If no unprocessed version can be found, we will just fall back to the first item in the list.
+  **API response, figther stats after conversion**
 
 - Once the user has selected two fighters, they will press "FIGHT" to start the fight.
 
-- The frontend will then use simple maths to calculate the winner of the food fight, and display the results to the user.
+- The frontend will then use simple maths to calculate the winner of the food fight, and display the fight results as a scrolling log.
 
 ### Stats logic
 
 The resulting food from Fineli API has different values for its ingredients, depending of the preparation method and food type.  
 We will use the following conditions to find its most unprocessed form:
-
-```javascript
-item.type.code = "FOOD" && item.preparationMethod[0].code = "RAW"
-```
-
-If these conditions cannot be met, we will fall back to just the first item in the list.
 
 ## Character stats
 
