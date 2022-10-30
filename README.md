@@ -73,7 +73,19 @@ The application has an automated CI/CD-pipeline using [Github actions](https://g
 Every tagged release on Github will launch a [deployment](./.github/workflows/deploy.yaml) to AWS.  
 The pipeline can also be run manually, using a workflow dispatch.
 
-## How it works?
+The pipeline has also testing built in, so the application will not be deployed if a test fails.
+
+## Deployment from local machine
+
+Additionally to the automated CI/CD pipeline, the application can also be deployed from the local machine using the [deploy script](./deploy.sh)
+
+`bash ./deploy.sh`
+
+If you want to deploy the application, you have to change the deploy script to use your own AWS credentials, and also purchase a domain name to be used with the deployment.
+
+---
+
+## Food Fight - How it works?
 
 - On the front end, the user will type a food into a search box and press "submit".
 
@@ -133,14 +145,6 @@ Damage from a single attack will be mitigated by the target's defense, after whi
 Whoever runs out of HP first loses.
 
 To avoid the audience getting bored of slow fights, the fights will be carried out at 100x speed :-)
-
-## Deployment
-
-Additionally to the automated CI/CD pipeline, the application can also be deployed from the local machine using the [deploy script](./deploy.sh)
-
-`bash ./deploy.sh`
-
-If you want to deploy the application, you have to change the deploy script to use your own AWS credentials, and also purchase a domain name to be used with the deployment.
 
 ## Final notes
 
