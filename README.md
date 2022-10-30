@@ -158,10 +158,3 @@ Damage from a single attack will be mitigated by the target's defense, after whi
 Whoever runs out of HP first loses.
 
 To avoid the audience getting bored of slow fights, the fights will be carried out at 100x speed :-)
-
-## Final notes
-
-I would like to take part in the koodihaaste competition.  
-I am also open for interesting job offers **:-)**
-
-You can contact me at [matias@matiasraisanen.com](mailto:matias@matiasraisanen.com)
