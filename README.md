@@ -70,7 +70,7 @@ It is hosted on AWS as a static website on an S3 Bucket.
 
 The application has an automated CI/CD-pipeline using [Github actions](https://github.com/features/actions).
 
-Every tagged release on Github will launch a [deployment](./.github/workflows/deploy.yaml).
+Every tagged release on Github will launch a [deployment](./.github/workflows/deploy.yaml) to AWS.  
 The pipeline can also be run manually, using a workflow dispatch.
 
 ## How it works?
