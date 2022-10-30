@@ -1,6 +1,6 @@
 # #!/bin/bash
 
-# We want to bail on errors. If test fail, deployment will not be carried out.
+# We want to bail on errors. If a test fails, deployment will not be carried out.
 set -e
 
 # Some colours to make the print prettier
@@ -16,18 +16,19 @@ printf "   ╠═══> 3. Deploy application to AWS\n"
 printf "   ╚════> 4. Run e2e tests\n"
 printf "${N}\n"
 
-
-# Run all tests
+# Run backend test
 (cd infra && npm run test Infrastructure && npm run test Application)
+
+# Run frontend tests
+(cd static && npm run test)
 
 # Build static website
 (cd static && npm run build)
 
 # Deploy application to AWS
-### Setup AWS profile name
 AWS_PROFILE_NAME="myPersonalAws"
 
 (cd infra && npx cdk deploy --outputs-file ./outputs/cfnOutputs.json --profile $AWS_PROFILE_NAME --require-approval never --all)
 
-# Run e2e test after deployment
+# Run e2e tests against Apigateway backend after deployment
 (cd infra && npm run test End-to-end)
