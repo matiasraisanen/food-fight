@@ -22,9 +22,17 @@ export default function FightLog(props) {
       }}>Fight log
 
       </Card.Header>
-      <Card.Body>
+      <Card.Body data-testid="logMessages">
         {messageList}
-        <Button className="clearButton" size="sm" variant="outline-secondary" onClick={() => props.clearLog()}>clear</Button>
+        <Button
+          className="clearButton"
+          size="sm"
+          variant="outline-secondary"
+          onClick={() => props.clearLog()}
+          data-testid="clearButton"
+        >
+          clear
+        </Button>
       </Card.Body>
     </Card>
   )

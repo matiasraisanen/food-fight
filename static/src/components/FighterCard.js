@@ -62,13 +62,13 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
     if (buttonText === "CHANGE") {
       setBlinking(true)
       inputRef.current.focus()
-      
+
       setInternalPlayer({
         ...internalPlayer,
         name: "",
       });
-      
-      updateParentPlayer({...internalPlayer, selected: false})
+
+      updateParentPlayer({ ...internalPlayer, selected: false })
     }
 
     if (buttonText === "SAVE") {
@@ -145,10 +145,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
             <tbody>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250}} 
-                placement="left" 
-                overlay={popover("HP", ["Health points.", "kcal in 100g = HP"])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("HP", ["Health points.", "kcal in 100g = HP"])}
                 >
                   <td>HP</td>
                 </OverlayTrigger>
@@ -156,10 +156,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
               </tr>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250 }} 
-                placement="left" 
-                overlay={popover("DMG", ["Damage inflicted per strike.", "carbs in 100g = damage"])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("DMG", ["Damage inflicted per strike.", "carbs in 100g = damage"])}
                 >
                   <td>DMG</td>
                 </OverlayTrigger>
@@ -167,10 +167,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
               </tr>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250 }} 
-                placement="left" 
-                overlay={popover("DEF", ["Defense reduces damage from an incoming attack by a percentage.", "protein in 100g = defense%"])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("DEF", ["Defense reduces damage from an incoming attack by a percentage.", "protein in 100g = defense%"])}
                 >
                   <td>DEF</td>
                 </OverlayTrigger>
@@ -178,10 +178,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
               </tr>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250 }} 
-                placement="left" 
-                overlay={popover("WAIT", ["Amount of seconds to wait between attacks.", "(carbs+protein+fat) in 100g = wait"])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("WAIT", ["Amount of seconds to wait between attacks.", "(carbs+protein+fat) in 100g = wait"])}
                 >
                   <td>WAIT</td>
                 </OverlayTrigger>
@@ -189,10 +189,10 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
               </tr>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250 }} 
-                placement="left" 
-                overlay={popover("APS", ["Attacks per second."])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("APS", ["Attacks per second."])}
                 >
                   <td>APS</td>
                 </OverlayTrigger>
@@ -200,34 +200,35 @@ export default function FighterCard({ player, playerNo, updateParentPlayer, setF
               </tr>
 
               <tr>
-                <OverlayTrigger 
-                delay={{ show: 250 }} 
-                placement="left" 
-                overlay={popover("DPS", ["Average damage inflicted per second."])}
+                <OverlayTrigger
+                  delay={{ show: 250 }}
+                  placement="left"
+                  overlay={popover("DPS", ["Average damage inflicted per second."])}
                 >
                   <td>DPS</td>
                 </OverlayTrigger>
                 <td>{internalPlayer.dps}</td>
               </tr>
-              
+
             </tbody>
           </Table>
 
-          <Button 
-          disabled={isLoading} 
-          onClick={handleClick} 
-          variant={buttonVariant} 
+          <Button
+            disabled={isLoading}
+            onClick={handleClick}
+            variant={buttonVariant}
+            data-testid="changeButton"
           >
             {buttonText} {' '}
-            
+
             {
               isLoading &&
-              <Spinner 
-              as="span" 
-              size="sm" 
-              animation="border" 
-              role="status" 
-              aria-hidden="true"
+              <Spinner
+                as="span"
+                size="sm"
+                animation="border"
+                role="status"
+                aria-hidden="true"
               />
             }
 

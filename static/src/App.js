@@ -82,28 +82,22 @@ function App() {
         clearInterval(intervalPlayer1)
         clearInterval(intervalPlayer2)
         setFightLogMessages(currentState => [`[${attacker.timer.toFixed(2)}s] - ${defender.name} has been defeated!`, ...currentState])
-        setFightLogMessages(currentState => [ gameSeparator, `${attacker.name} wins!`, ...currentState])
+        setFightLogMessages(currentState => [gameSeparator, `${attacker.name} wins!`, ...currentState])
         setFightOngoing(false)
       }
     }
 
-    const intervalPlayer1 = setInterval( () => playerTurn(p1, p2), p1.wait * (1000 / fightSpeedMultiplier));
-    const intervalPlayer2 = setInterval( () => playerTurn(p2, p1), p2.wait * (1000 / fightSpeedMultiplier));
-
-    // TODO: Add a way to stop the fight if it goes on for too long.
-            // msg: "Fight stopped. The crowd got bored of watching..."
-
-    // TODO: Add a way to change fight speed from UI
-                          // speed["1x", "10x", "100x", "1000x"]
+    const intervalPlayer1 = setInterval(() => playerTurn(p1, p2), p1.wait * (1000 / fightSpeedMultiplier));
+    const intervalPlayer2 = setInterval(() => playerTurn(p2, p1), p2.wait * (1000 / fightSpeedMultiplier));
 
   }
 
   return (
     <div className="App" >
       <Header />
-      
+
       <Toaster message={toasterMessage} show={showToaster} setShow={setShowToaster} />
-      
+
       <div className="App-cardZone">
 
         <FighterCard
@@ -127,27 +121,30 @@ function App() {
       </div>
 
       <div>
-        <Button 
-        onClick={() => fight(player1, player2)} 
-        disabled={fightOngoing || !player1.selected || !player2.selected} 
-        variant="danger" 
-        size="lg" 
-        style={{ color: "black", "fontWeight": "bold" }}
+        <Button
+          onClick={() => fight(player1, player2)}
+          disabled={fightOngoing || !player1.selected || !player2.selected}
+          variant="danger"
+          size="lg"
+          style={{ color: "black", "fontWeight": "bold" }}
         >
           FIGHT {' '}
           {fightOngoing &&
-            <Spinner 
-              as="span" 
-              size="sm" 
-              animation="border" 
-              role="status" 
+            <Spinner
+              as="span"
+              size="sm"
+              animation="border"
+              role="status"
               aria-hidden="true" />
           }
         </Button>
       </div>
 
       <div>
-        <FightLog messages={fightLogMessages} clearLog={() => setFightLogMessages([])} />
+        <FightLog
+          messages={fightLogMessages}
+          clearLog={() => setFightLogMessages([])}
+        />
       </div>
 
       <div>
