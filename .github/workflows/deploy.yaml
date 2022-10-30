@@ -33,15 +33,15 @@ jobs:
           aws-access-key-id: ${{ secrets.aws_access_key_id }}
           aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
           aws-region: eu-west-1
-      - name: Install dependencies
+      - name: "Build FrontEnd"
+        run: (cd static && npm ci && npm run build)
+      - name: "Test FrontEnd"
+        run: (cd static && npm run test)
+      - name: Install backend dependencies
         run: (cd infra && npm ci)
       - name: "Test Infrastructure"
         run: (cd infra && npm run test infrastructure)
       - name: "Test Application"
         run: (cd infra && npm run test application)
-      - name: "Build FrontEnd"
-        run: (cd static && npm i && npm run build)
-      - name: "Test FrontEnd"
-        run: (cd static && npm run test)
       - name: Deploy stacks to AWS
         run: (cd infra && npx cdk deploy --outputs-file ./outputs/cfnOutputs.json --require-approval never --all)
