@@ -1,0 +1,47 @@
+name: Application deployment
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  buildAndDeploy:
+    permissions:
+      id-token: write
+      contents: read
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Uses Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-region: eu-west-1
+      - name: Install dependencies
+        run: (cd infra && npm ci)
+      - name: "Test Infrastructure"
+        run: (cd infra && npm run test infrastructure)
+      - name: "Test Application"
+        run: (cd infra && npm run test application)
+      - name: "Build FrontEnd"
+        run: (cd static && npm i && npm run build)
+      - name: "Test FrontEnd"
+        run: (cd static && npm run test)
+      - name: Deploy stacks to AWS
+        run: (cd infra && npx cdk deploy --outputs-file ./outputs/cfnOutputs.json --require-approval never --all)
