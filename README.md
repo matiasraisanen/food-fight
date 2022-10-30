@@ -4,6 +4,19 @@ This is a web application in which two foodstuffs duel each other :-)
 
 Live demo @ [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)
 
+```json
+  "techKeywords": [
+    "TypeScript",
+    "React",
+    "AWS CDK",
+    "Serverless",
+    "Github Actions",
+    "Jest",
+    "Fullstack",
+    "Linux"
+  ]
+```
+
 ## Introduction
 
 The objective of this project is to take part in Solidabis code challenge 2022 //
