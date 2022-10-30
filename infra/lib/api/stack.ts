@@ -14,7 +14,6 @@ export class ApiStack extends cdk.Stack {
       bundling: {
         minify: false,
       },
-      architecture: cdk.aws_lambda.Architecture.ARM_64,
       logRetention: cdk.aws_logs.RetentionDays.ONE_WEEK,
       timeout: cdk.Duration.seconds(10),
       entry: path.join(__dirname, "../api/food-into-stats-fn.ts"),
