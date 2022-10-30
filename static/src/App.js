@@ -87,6 +87,7 @@ function App() {
       }
     }
 
+    // Start the fight loop
     const intervalPlayer1 = setInterval(() => playerTurn(p1, p2), p1.wait * (1000 / fightSpeedMultiplier));
     const intervalPlayer2 = setInterval(() => playerTurn(p2, p1), p2.wait * (1000 / fightSpeedMultiplier));
 
