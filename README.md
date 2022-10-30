@@ -20,9 +20,6 @@ The application must:
 3. Have logic that allows two foodstuffs to duel each other
 4. Present the duel results visually on the front end
 
-This application is hosted on AWS, and available at [koodihaaste.matiasraisanen.com](https://koodihaaste.matiasraisanen.com/index.html)  
-_Unless I have taken it down..._
-
 I took the liberty of only using English in the project, as I felt it to be more fitting as a human interface language than Finnish. Fighter names (food items) will be Finnish though.
 
 Here's a little list of fighters to try out.
@@ -132,7 +129,9 @@ To avoid the audience getting bored of slow fights, the fights will be carried o
 
 ## Deployment
 
-The application is deployed to AWS via steps listed in [deploy.sh](./deploy.sh)
+The application is built and deployed to AWS using the [deploy script](./deploy.sh)
+
+`bash ./deploy.sh`
 
 If you want to deploy the application, you have to change the deploy script to use your own AWS credentials, and also purchase a domain name to be used with the deployment.
 
