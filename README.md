@@ -40,12 +40,12 @@ Here's a little list of fighters to try out.
 You can run this application's frontend locally:  
 `cd static && npm i && npm run start`
 
-Local test can be run like so:  
+Local tests can be run like so:  
 `npm run test`
 
 The local version will still contact the actual production backend on AWS.
 
-Backend can be deployed using CDK from under `infra` folder, but in order for it to be work you need to configure your AWS credentials, which I will not go into here.
+Backend can be deployed using CDK from under `infra` folder, but in order for it to work you need to configure your own AWS credentials, which I will not go into here.
 
 ---
 
@@ -102,16 +102,11 @@ item.type.code = "FOOD" && item.preparationMethod[0].code = "RAW"
   }
   ```
 
-  **API response, figther stats after conversion**
+  **API response, fighter stats after conversion**
 
 - Once the user has selected two fighters, they will press "FIGHT" to start the fight.
 
 - The frontend will then use simple maths to calculate the winner of the food fight, and display the fight results as a scrolling log.
-
-### Stats logic
-
-The resulting food from Fineli API has different values for its ingredients, depending of the preparation method and food type.  
-We will use the following conditions to find its most unprocessed form:
 
 ## Character stats
 
