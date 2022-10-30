@@ -13,17 +13,6 @@ export class CloudFrontStack extends cdk.Stack {
       runtime: cdk.aws_lambda.Runtime.NODEJS_16_X,
     });
 
-    // Add a Lambda@Edge to rewrite paths and add redirects headers to the static site.
-    const staticRewriteLambda = new cdk.aws_cloudfront.experimental.EdgeFunction(
-      this,
-      "staticRewrite",
-      {
-        code: cdk.aws_lambda.Code.fromAsset(path.join(__dirname, "./")),
-        handler: "rewrite.onViewerRequest",
-        runtime: cdk.aws_lambda.Runtime.NODEJS_16_X,
-      }
-    );
-
     // Get certicate from us-east-1
     const certificateARN = cdk.aws_ssm.StringParameter.valueForStringParameter(
       this,
@@ -90,17 +79,7 @@ export class CloudFrontStack extends cdk.Stack {
                 cdk.Fn.importValue("StaticBucketOAI")
               ),
           },
-          behaviors: [
-            {
-              lambdaFunctionAssociations: [
-                {
-                  lambdaFunction: staticRewriteLambda,
-                  eventType: cdk.aws_cloudfront.LambdaEdgeEventType.VIEWER_REQUEST,
-                },
-              ],
-              isDefaultBehavior: true,
-            },
-          ],
+          behaviors: [{ isDefaultBehavior: true }],
         },
       ],
     });
